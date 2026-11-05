@@ -650,7 +650,7 @@ const SPECIES = [
     desc:{en:"",
           tr:"",
           fr:""}},
-    {id:"turdus-viscivorus", cls:"Mammalia", sci:"Turdus viscivorus", acc:"OIS.0030", sex:"unknown", juvenile:false, status:"lc",
+    {id:"turdus-viscivorus", cls:"Aves", sci:"Turdus viscivorus", acc:"OIS.0030", sex:"unknown", juvenile:false, status:"lc",
     photos:["images/866A3716.jpg", "images/866A3706.jpg", "images/866A3712.jpg", "images/866A3713.jpg", "images/866A3709.jpg"],
     common:{en:"Mistle thrush", tr:"Ökse ardıcı", fr:"Grive draine"},
     desc:{en:"",
@@ -673,21 +673,21 @@ const SEX_LABEL = {
   fr:{male:'Mâle',female:'Femelle',unknown:'Indéterminé'}
 };
 const CLASS_LABEL = {
-  en:{Mammalia:'Mammals',Aves:'Birds',Reptilia:'Reptiles',Amphibia:'Amphibians'},
-  tr:{Mammalia:'Memeliler',Aves:'Kuşlar',Reptilia:'Sürüngenler',Amphibia:'Amfibiler'},
-  fr:{Mammalia:'Mammifères',Aves:'Oiseaux',Reptilia:'Reptiles',Amphibia:'Amphibiens'}
+  en:{Mammalia:'Mammals',Aves:'Birds',Reptilia:'Reptiles',Amphibia:'Amphibians',RocksandMin: 'Rocks and Minerals' ,Fossilia: 'Fossils' ,Porifera: 'Sponges'},
+  tr:{Mammalia:'Memeliler',Aves:'Kuşlar',Reptilia:'Sürüngenler',Amphibia:'Amfibiler' ,RocksandMin: 'Taşlar ve Mineraller' ,Fossilia: 'Fosiller' ,Porifera: 'Süngerler'},
+  fr:{Mammalia:'Mammifères',Aves:'Oiseaux',Reptilia:'Reptiles',Amphibia:'Amphibiens' ,RocksandMin: 'Roches et minéraux' ,Fossilia: 'Fossiles' ,Porifera: 'Éponges'}
 };
 
 const T = {
 en:{
   nav:{home:'Home',about:'About',history:'History',explore:'Explore',tree:'Tree of Life',behind:'Behind the Scenes',ack:'Acknowledgements',resources:'Resources'},
   brand:{sub:'Saint Benoît High School Natural History Museum'},
-  home:{heroCaption:'[photo]', kicker:'[text]', title:'[text]',
+  home:{heroCaption:'[photo]', kicker:'Created by Güliz Akar', title:'Welcome to Turkey\'s first digital natural history museum!',
     lead:'This collection, which had been in storage for a long time, was cleaned, identified, cataloged, and photographed piece by piece. It is now on display for anyone interested to examine.',
     waysTitle:'Two ways to explore', waysText:'Browse the collection as a catalogue, specimen by specimen, or follow the tree of life to see how every specimen is related.',
     exploreBtn:'See the collection', treeBtn:'See the tree of life',
     aboutTitle:'[text]', aboutText:'[text]',
-    highlightsTitle:'From the collection'},
+    highlightsTitle:'From the collection...'},
   about:{kicker:'about the project', title:'About', portraitCaption:'[photo]',
     bio:'[info]',
     forewordProject:'[foreword of the project]',
@@ -721,7 +721,7 @@ en:{
 tr:{
   nav:{home:'Ana Sayfa',about:'Hakkında',history:'Tarihçe',explore:'Koleksiyonu Keşfet',tree:'Yaşam Ağacı',behind:'Perde Arkası',ack:'Teşekkürler',resources:'Kaynaklar'},
   brand:{sub:'Saint Benoît Lisesi Tabiat Tarihi Müzesi'},
-  home:{heroCaption:'[photo]', kicker:'[text]', title:'[text]',
+  home:{heroCaption:'[photo]', kicker:'Güliz Akar tarafından hazırlanmıştır', title:'Türkiye\'nin ilk dijital tabiat tarihi müzesine hoş geldiniz!',
     lead:'Uzun süredir depoda saklanan bu koleksiyon, titizlikle temizlendi, teşhis edildi, kaydedildi ve fotoğraflandı. Artık merak eden herkesin incelemesi için gözler önünde.',
     waysTitle:'İki farklı keşif yolu', waysText:'Koleksiyonu bir katalog gibi, örnek örnek inceleyebilir ya da yaşam ağacını takip edebilir ve tüm örneklerin birbiriyle ilişkisini görebilirsiniz.',
     exploreBtn:'Koleksiyonu gör', treeBtn:'Yaşam ağacını gör',
@@ -735,7 +735,7 @@ tr:{
     forewordSupervisorWho:'— [name]',
     forewordPrincipal:'[text]',
     forewordPrincipalWho:'— [name]'},
-  history:{kicker:'koleksiyonun başlangıcı hakkında', title:'Tarihçe',
+  history:{kicker:'koleksiyonun nereden geldiği hakkında', title:'Tarihçe',
     lead:'[explanation of how the collection was researched]',
     quote:'"[A line from the interview]"',
     quoteSrc:'— [source]',
@@ -760,7 +760,7 @@ tr:{
 fr:{
   nav:{home:'Accueil',about:'À propos',history:'Histoire',explore:'Explorer la collection',tree:"Arbre du vivant",behind:'Coulisses',ack:'Remerciements',resources:'Ressources'},
   brand:{sub:'  '},
-  home:{heroCaption:'[photo]', kicker:'[text]', title:'[text]',
+  home:{heroCaption:'[photo]', kicker:'Créé par Güliz Akar', title:'Bienvenue au premier musée numérique d\'histoire naturelle de Turquie !',
     lead:"Cette collection, conservée depuis longtemps en entrepôt, a été soigneusement nettoyée, identifiée, répertoriée et photographiée. Elle est désormais accessible à tous ceux qui souhaitent la découvrir.",
     waysTitle:'Deux façons de découvrir', waysText:"Parcourez la collection comme un catalogue, spécimen par spécimen, ou suivez l'arbre du vivant pour voir comment tout est lié.",
     exploreBtn:'Voir la collection', treeBtn:"Voir l'arbre du vivant",
@@ -1135,5 +1135,3 @@ goto('home');
 </script>
 </body>
 </html>
-
-
