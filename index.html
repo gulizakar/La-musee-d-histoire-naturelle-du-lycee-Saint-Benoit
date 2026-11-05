@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La musée d'histoire naturelle du Lycée Saint Benoît</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper:      #ece3ce;
+    --paper-card: #f6f0e2;
+    --ink:        #211c15;
+    --ink-soft:   #4a4038;
+    --walnut:     #5f3d24;
+    --brass:      #a9803f;
+    --brass-dim:  #c9ac74;
+    --ledger-red: #8a3a34;
+    --rule:       rgba(33,28,21,0.18);
+    --shadow:     none;
+    --radius:     2px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:      #1b1712;
+      --paper-card: #221d16;
+      --ink:        #ece3ce;
+      --ink-soft:   #cabfa9;
+      --walnut:     #d9b98a;
+      --brass:      #c9ac74;
+      --brass-dim:  #8a7245;
+      --ledger-red: #d98b83;
+      --rule:       rgba(236,227,206,0.18);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:      #1b1712;
+    --paper-card: #221d16;
+    --ink:        #ece3ce;
+    --ink-soft:   #cabfa9;
+    --walnut:     #d9b98a;
+    --brass:      #c9ac74;
+    --brass-dim:  #8a7245;
+    --ledger-red: #d98b83;
+    --rule:       rgba(236,227,206,0.18);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"EB Garamond", Georgia, "Times New Roman", serif;
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:"Cormorant Garamond", Georgia, serif;
+    font-weight:500;
+    margin:0 0 .4em;
+    color:var(--ink);
+    letter-spacing:.01em;
+  }
+  a{color:var(--walnut);}
+  p{max-width:64ch;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  .rule{border:none;border-top:1px solid var(--rule);margin:2.2em 0;}
+  img,svg{max-width:100%;}
+  button{font-family:inherit;}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:var(--paper);
+    border-bottom:1px solid var(--rule);
+  }
+  .head-row{
+    display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+    padding:14px 28px 6px;max-width:1080px;margin:0 auto;
+  }
+  .logo-slot{
+    width:46px;height:46px;flex:0 0 auto;
+    border:1px dashed var(--brass-dim);
+    display:flex;align-items:center;justify-content:center;
+    font-size:10px;color:var(--ink-soft);text-align:center;line-height:1.1;
+    font-family:"EB Garamond",serif;
+  }
+  .brand{flex:1 1 auto;}
+  .brand .t1{font-family:"Cormorant Garamond",serif;font-size:1.5rem;line-height:1;color:var(--ink);}
+  .brand .t2{font-size:.72rem;color:var(--ink-soft);font-style:italic;letter-spacing:.02em;}
+  nav.main{
+    order:3;width:100%;display:flex;gap:28px;justify-content:flex-start;flex-wrap:wrap;
+    margin-top:2px;padding-top:6px;border-top:1px solid var(--rule);
+  }
+  nav.main button{
+    background:none;border:none;cursor:pointer;
+    font-family:"EB Garamond",serif;font-style:italic;font-size:1rem;
+    color:var(--ink-soft);padding:4px 2px;border-bottom:1px solid transparent;
+  }
+  nav.main button.active,nav.main button:hover{color:var(--ink);border-bottom-color:var(--brass);}
+  .langs{display:flex;gap:6px;flex:0 0 auto;}
+  .langs button{
+    border:1px solid var(--rule);background:none;color:var(--ink-soft);
+    padding:3px 8px;font-size:.72rem;cursor:pointer;letter-spacing:.04em;
+    font-family:"EB Garamond",serif;
+  }
+  .langs button.active{background:var(--walnut);color:var(--paper-card);border-color:var(--walnut);}
+  @media (max-width:820px){
+    .head-row{flex-wrap:wrap;}
+    nav.main{order:3;width:100%;justify-content:flex-start;gap:14px;overflow-x:auto;padding-top:8px;border-top:1px solid var(--rule);}
+  }
+
+  /* ---------- sections / layout ---------- */
+  main{display:block;}
+  section.view{display:none;padding:56px 0 80px;}
+  section.view.active{display:block;}
+  .kicker{font-style:italic;color:var(--brass);margin-bottom:.3em;font-size:1rem;}
+  .lead{font-size:1.15rem;color:var(--ink-soft);max-width:62ch;}
+
+  /* placeholder frame — the recurring "vitrine" motif */
+  .frame{
+    position:relative;background:
+      linear-gradient(135deg, var(--paper-card), var(--paper));
+    border:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-soft);font-style:italic;font-size:.92rem;text-align:center;
+    padding:14px;min-height:120px;
+  }
+  .frame .corner{position:absolute;width:16px;height:16px;border:1.5px solid var(--brass);}
+  .frame .tl{top:6px;left:6px;border-right:none;border-bottom:none;}
+  .frame .tr{top:6px;right:6px;border-left:none;border-bottom:none;}
+  .frame .bl{bottom:6px;left:6px;border-right:none;border-top:none;}
+  .frame .br{bottom:6px;right:6px;border-left:none;border-top:none;}
+
+  /* ---------- home ---------- */
+  .hero{padding-top:10px;}
+  .hero .frame{height:min(52vw,420px);margin-bottom:26px;}
+  .hero h1{font-size:clamp(2.1rem,4.4vw,3.4rem);max-width:16ch;}
+  .home-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;margin-top:20px;}
+  @media (max-width:760px){.home-grid{grid-template-columns:1fr;}}
+  .highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px;}
+  @media (max-width:760px){.highlights{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.highlights{grid-template-columns:1fr;}}
+  .h-card{border:1px solid var(--rule);background:var(--paper-card);padding:12px;}
+  .h-card .frame{height:120px;margin-bottom:10px;font-size:.75rem;}
+  .h-card .sci{font-style:italic;color:var(--ink-soft);font-size:.88rem;}
+  .h-card h4{font-size:1.15rem;margin-bottom:.15em;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid .frame{height:340px;margin-bottom:14px;}
+  .foreword{border-left:2px solid var(--brass-dim);padding-left:20px;margin-bottom:34px;}
+  .foreword .who{font-style:italic;color:var(--brass);margin-top:.6em;font-size:.95rem;}
+
+  /* ---------- history ---------- */
+  .timeline{position:relative;padding-left:26px;margin-top:30px;}
+  .timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--rule);}
+  .t-item{position:relative;margin-bottom:34px;}
+  .t-item::before{content:"";position:absolute;left:-26px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--brass);}
+  .t-item .yr{font-family:"Cormorant Garamond",serif;color:var(--brass);font-size:1.1rem;}
+  .pull{
+    background:var(--paper-card);border:1px solid var(--rule);
+    padding:26px 30px;margin:34px 0;font-family:"Cormorant Garamond",serif;
+    font-size:1.35rem;font-style:italic;color:var(--ink);max-width:56ch;
+  }
+  .pull .src{display:block;margin-top:12px;font-size:.85rem;font-family:"EB Garamond",serif;color:var(--ink-soft);font-style:normal;}
+
+  /* ---------- explore / specimens ---------- */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 30px;}
+  .filters button{
+    border:1px solid var(--rule);background:none;color:var(--ink-soft);
+    padding:6px 14px;font-size:.85rem;cursor:pointer;font-family:"EB Garamond",serif;font-style:italic;
+  }
+  .filters button.active{border-color:var(--walnut);color:var(--ink);background:var(--paper-card);}
+  .grid-specimens{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:820px){.grid-specimens{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.grid-specimens{grid-template-columns:1fr;}}
+  .spec-card{border:1px solid var(--rule);background:var(--paper-card);cursor:pointer;transition:border-color .15s;}
+  .spec-card:hover{border-color:var(--walnut);}
+  .spec-card .frame{height:150px;}
+  .spec-card .body{padding:14px 16px 16px;}
+  .spec-card .sci{font-style:italic;color:var(--ink-soft);font-size:.9rem;}
+  .spec-card h4{font-size:1.2rem;margin:.1em 0 .3em;}
+  .tag{
+    display:inline-block;font-size:.72rem;padding:2px 9px;border:1px solid currentColor;
+    border-radius:20px;margin-top:6px;
+  }
+  .tag.lc{color:#5c7a4f;} .tag.nt{color:var(--brass);} .tag.vu{color:#a3672c;}
+  .tag.en{color:var(--ledger-red);} .tag.dd{color:var(--ink-soft);}
+
+  /* ---------- specimen detail ---------- */
+  .back-link{background:none;border:none;color:var(--brass);font-style:italic;cursor:pointer;font-size:.95rem;padding:0;margin-bottom:20px;font-family:"EB Garamond",serif;}
+  .spec-detail{
+    display:grid;grid-template-columns:1.3fr .95fr;grid-template-rows:auto 1fr;
+    grid-template-areas:"photos card" "desc card";gap:12px 44px;
+  }
+  .spec-detail .spec-hero{grid-area:photos;}
+  .spec-detail .catalog-card{grid-area:card;align-self:start;}
+  .spec-detail .spec-desc{grid-area:desc;}
+  @media (max-width:800px){
+    .spec-detail{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:"photos" "card" "desc";gap:24px;}
+  }
+  .spec-hero .frame{height:360px;margin-bottom:12px;}
+  .filmstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .filmstrip .frame{height:70px;font-size:.62rem;}
+  .catalog-card{border:1px solid var(--rule);background:var(--paper-card);padding:22px 24px;}
+  .catalog-card .acc{font-size:.78rem;color:var(--ink-soft);letter-spacing:.03em;margin-bottom:10px;}
+  .catalog-card h2{font-style:italic;font-size:1.7rem;margin-bottom:.05em;}
+  .catalog-card .common{color:var(--ink-soft);margin-bottom:16px;font-size:1rem;}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:.95rem;margin-bottom:16px;}
+  .kv dt{font-style:italic;color:var(--ink-soft);}
+  .kv dd{margin:0;}
+  .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;background:var(--ink-soft);}
+  .status-dot.lc{background:#5c7a4f;}
+  .status-dot.nt{background:var(--brass);}
+  .status-dot.vu{background:#a3672c;}
+  .status-dot.en2{background:var(--ledger-red);}
+  .status-dot.cr{background:#5a1f1b;}
+  .sex-sym{font-size:1.3rem;line-height:1;font-family:"EB Garamond",serif;}
+  .frame.photo{padding:0;overflow:hidden;}
+  .frame.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+  .frame.photo .corner{z-index:2;border-color:var(--paper-card);}
+  .filmstrip > div{cursor:pointer;}
+
+  /* ---------- tree of life ---------- */
+  .tree-wrap{border:1px solid var(--rule);background:var(--paper-card);overflow-x:auto;padding:10px;}
+  .tree-node circle{fill:var(--paper-card);stroke:var(--walnut);stroke-width:1.4;cursor:pointer;}
+  .tree-node.class circle{fill:var(--walnut);stroke:var(--walnut);}
+  .tree-node text{font-family:"EB Garamond",serif;fill:var(--ink);font-size:13px;}
+  .tree-node .sci-t{font-style:italic;fill:var(--ink-soft);font-size:11px;}
+  .tree-link{fill:none;stroke:var(--rule);stroke-width:1.2;}
+  .tree-node:hover circle{stroke:var(--ledger-red);}
+
+  /* ---------- behind the scenes ---------- */
+  .bts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px;}
+  @media (max-width:760px){.bts-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.bts-grid{grid-template-columns:1fr;}}
+  .bts-grid .frame{height:150px;font-size:.8rem;}
+  .ba-slider{position:relative;max-width:560px;border:1px solid var(--rule);margin-top:14px;user-select:none;}
+  .ba-slider .layer{position:relative;height:320px;}
+  .ba-slider .frame{position:absolute;inset:0;height:auto;}
+  .ba-slider .after-clip{position:absolute;inset:0;overflow:hidden;width:50%;}
+  .ba-slider .after-clip .frame{width:560px;max-width:none;}
+  .ba-slider input[type=range]{
+    position:absolute;bottom:10px;left:10px;right:10px;width:calc(100% - 20px);
+  }
+  .ba-divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--brass);pointer-events:none;}
+  .ba-labels{display:flex;justify-content:space-between;font-size:.78rem;font-style:italic;color:var(--ink-soft);margin-top:6px;}
+
+  /* ---------- acknowledgements ---------- */
+  .ack-tier{margin-bottom:38px;}
+  .ack-tier .tier-label{font-style:italic;color:var(--brass);font-size:.9rem;margin-bottom:10px;}
+  .ack-t1{font-family:"Cormorant Garamond",serif;font-size:1.5rem;}
+  .ack-t1 span{display:block;margin-bottom:6px;}
+  .ack-t2{columns:2;font-size:1.05rem;gap:30px;}
+  @media (max-width:600px){.ack-t2{columns:1;}}
+  .ack-t2 div{margin-bottom:4px;break-inside:avoid;}
+  .ack-t3{columns:3;font-size:.92rem;color:var(--ink-soft);gap:24px;}
+  @media (max-width:760px){.ack-t3{columns:2;}}
+  @media (max-width:480px){.ack-t3{columns:1;}}
+  .ack-t3 div{margin-bottom:3px;}
+  .ack-note{font-style:italic;color:var(--ink-soft);max-width:60ch;margin:0;}
+
+  .btn{
+    justify-self:start;background:var(--walnut);color:var(--paper-card);border:none;
+    padding:9px 22px;font-style:italic;cursor:pointer;font-size:.95rem;
+  }
+
+  /* ---------- footer ---------- */
+  footer.site{border-top:1px solid var(--rule);margin-top:20px;padding:40px 0 30px;}
+  .foot-note{font-style:italic;color:var(--ink-soft);font-size:.95rem;max-width:70ch;margin:34px 0 0;padding-top:20px;border-top:1px solid var(--rule);}
+  .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px;}
+  @media (max-width:700px){.foot-grid{grid-template-columns:1fr;}}
+  footer h4{font-size:1.05rem;margin-bottom:.5em;}
+  footer .t2{color:var(--ink-soft);font-size:.9rem;}
+  footer .fine{margin-top:26px;font-size:.78rem;color:var(--ink-soft);text-align:center;}
+
+  /* photo boxes follow the 3:2 shape of the photos (1601 x 1068), so nothing is squashed or cropped */
+  .spec-card .frame, .h-card .frame, .spec-hero .frame, .filmstrip .frame{
+    height:auto;min-height:0;aspect-ratio:3 / 2;
+  }
+  .spec-hero #heroSlot .frame.photo img{object-fit:contain;}
+
+  /* resources */
+  .foot-link{background:none;border:none;color:var(--ink-soft);font-family:inherit;font-style:italic;font-size:.88rem;cursor:pointer;text-decoration:underline;text-decoration-color:var(--brass-dim);text-underline-offset:3px;padding:0;margin-top:22px;}
+  .foot-link:hover{color:var(--ink);}
+  .res-list{margin-top:28px;max-width:720px;}
+  .res-item{border-top:1px solid var(--rule);padding:18px 0;}
+  .res-item h3{font-size:1.35rem;margin:0 0 .15em;}
+  .res-item h3 a{color:var(--ink);text-decoration-color:var(--brass);text-underline-offset:4px;}
+  .res-item p{margin:0;color:var(--ink-soft);font-size:1rem;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="head-row">
+    <div class="logo-slot">logo<br>here</div>
+    <div class="brand">
+      <div class="t1">La collection d'histoire naturelle du Lycée Saint Benoît</div>
+      <div class="t2" data-i18n="brand.sub">A natural history collection, rediscovered</div>
+    </div>
+    <nav class="main" id="mainNav"></nav>
+    <div class="langs" id="langSwitch">
+      <button data-lang="en">EN</button>
+      <button data-lang="tr">TR</button>
+      <button data-lang="fr">FR</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HOME -->
+  <section class="view" id="view-home">
+    <div class="hero">
+      <div class="frame" id="heroFrame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="home.heroCaption">hero photograph — collection overview</span></div>
+      <div class="kicker" data-i18n="home.kicker">a student-led restoration</div>
+      <h1 data-i18n="home.title">A locked cabinet, opened again</h1>
+      <p class="lead" data-i18n="home.lead">For decades this collection sat sealed in storage. Piece by piece, it has been cleaned, identified, logged and photographed — and is now open to anyone curious enough to look closely.</p>
+    </div>
+
+    <div class="home-grid">
+      <div>
+        <h3 data-i18n="home.waysTitle">Two ways to look</h3>
+        <p data-i18n="home.waysText">Browse the collection as a catalogue, specimen by specimen — or follow the tree of life to see how everything in the collection is related.</p>
+        <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;">
+          <button class="btn" data-goto="explore" data-i18n="home.exploreBtn">Explore the collection</button>
+          <button class="btn" style="background:var(--brass);" data-goto="tree" data-i18n="home.treeBtn">See the tree of life</button>
+        </div>
+      </div>
+      <div>
+        <h3 data-i18n="home.aboutTitle">Who did this</h3>
+        <p data-i18n="home.aboutText">This project is the work of one student, with a great deal of help. The full story is on the About and Behind the Scenes pages.</p>
+      </div>
+    </div>
+
+    <hr class="rule">
+    <h3 data-i18n="home.highlightsTitle">From the collection</h3>
+    <div class="highlights" id="homeHighlights"></div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="view-about">
+    <div class="kicker" data-i18n="about.kicker">about the project</div>
+    <h1 data-i18n="about.title">About</h1>
+    <div class="about-grid">
+      <div>
+        <div class="frame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="about.portraitCaption">portrait — [your name]</span></div>
+        <p data-i18n="about.bio">[Your name] is a student who spent [timeframe] restoring a natural history collection that had been in storage for years. This site is the record of that work — what was found, what it took to save it, and what it means to open it up.</p>
+      </div>
+      <div>
+        <div class="foreword">
+          <p data-i18n="about.forewordProject">This project began with a single drawer of unlabeled specimens and a question: what happens to a collection nobody is looking after? What follows is an attempt to answer that — through cleaning, identifying, logging, and photographing every specimen the cabinet held, and building a place where anyone can see the result.</p>
+          <span class="who" data-i18n="about.forewordProjectWho">— [Your name], project lead</span>
+        </div>
+        <div class="foreword">
+          <p data-i18n="about.forewordSupervisor">[Foreword from the project supervisor — a few sentences on the significance of the work and the student's dedication to it.]</p>
+          <span class="who" data-i18n="about.forewordSupervisorWho">— [Project Supervisor's name]</span>
+        </div>
+        <div class="foreword">
+          <p data-i18n="about.forewordPrincipal">[Foreword from the principal — a few sentences welcoming the collection back into use and situating it within the school's history.]</p>
+          <span class="who" data-i18n="about.forewordPrincipalWho">— [Principal's name]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="view" id="view-history">
+    <div class="kicker" data-i18n="history.kicker">where the collection came from</div>
+    <h1 data-i18n="history.title">History</h1>
+    <p class="lead" data-i18n="history.lead">Piecing together how this cabinet came to exist meant combining archival research with a conversation with a historian who helped make sense of what the records didn't say.</p>
+
+    <div class="timeline" id="historyTimeline"></div>
+
+    <div class="pull">
+      <span data-i18n="history.quote">"[A line from the interview (kept here as a placeholder until the full transcript is incorporated).]"</span>
+      <span class="src" data-i18n="history.quoteSrc">— from an interview with [Historian's name]</span>
+    </div>
+    <p data-i18n="history.closing">[Closing paragraph connecting the collection's past to the restoration project, why it mattered to bring it back.]</p>
+  </section>
+
+  <!-- EXPLORE -->
+  <section class="view" id="view-explore">
+    <div class="kicker" data-i18n="explore.kicker">the catalogue</div>
+    <h1 data-i18n="explore.title">Explore the collection</h1>
+    <p class="lead" data-i18n="explore.lead">Every specimen below has been cleaned, identified and logged. Select one to see its full record.</p>
+    <div class="filters" id="classFilters"></div>
+    <div class="grid-specimens" id="specimenGrid"></div>
+  </section>
+
+  <!-- SPECIMEN DETAIL -->
+  <section class="view" id="view-specimen">
+    <button class="back-link" data-goto="explore" data-i18n="specimen.back">← back to the catalogue</button>
+    <div class="spec-detail" id="specimenDetail"></div>
+  </section>
+
+  <!-- TREE OF LIFE -->
+  <section class="view" id="view-tree">
+    <div class="kicker" data-i18n="tree.kicker">an alternative route through the collection</div>
+    <h1 data-i18n="tree.title">Tree of life</h1>
+    <p class="lead" data-i18n="tree.lead">Rather than browsing by shelf, follow the branches below to see how the specimens in this collection relate to one another. Select any name to open its record.</p>
+    <div class="tree-wrap"><svg id="treeSvg" width="720" height="420"></svg></div>
+  </section>
+
+  <!-- BEHIND THE SCENES -->
+  <section class="view" id="view-behind">
+    <div class="kicker" data-i18n="behind.kicker">the restoration itself</div>
+    <h1 data-i18n="behind.title">Behind the scenes</h1>
+    <p class="lead" data-i18n="behind.lead">None of this arrived ready for display. Here is some of what the work actually looked like.</p>
+
+    <h3 data-i18n="behind.cleaningTitle">Cleaning and stabilising</h3>
+    <div class="bts-grid" id="cleaningGrid"></div>
+
+    <h3 style="margin-top:36px;" data-i18n="behind.baTitle">Before and after</h3>
+    <div class="ba-slider" id="baSlider">
+      <div class="layer">
+        <div class="frame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="behind.beforeCaption">before</span></div>
+        <div class="after-clip" id="afterClip">
+          <div class="frame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="behind.afterCaption">after</span></div>
+        </div>
+        <div class="ba-divider" id="baDivider"></div>
+      </div>
+      <input type="range" min="0" max="100" value="50" id="baRange">
+    </div>
+    <div class="ba-labels"><span data-i18n="behind.beforeCaption">before</span><span data-i18n="behind.afterCaption">after</span></div>
+
+    <h3 style="margin-top:36px;" data-i18n="behind.workshopTitle">The workshop</h3>
+    <p data-i18n="behind.workshopText">A large part of the work happened in a single hands-on workshop, where volunteers helped with cleaning, sorting and logging.</p>
+    <div class="bts-grid" id="workshopGrid"></div>
+  </section>
+
+  <!-- ACKNOWLEDGEMENTS -->
+  <section class="view" id="view-ack">
+    <div class="kicker" data-i18n="ack.kicker">this did not happen alone</div>
+    <h1 data-i18n="ack.title">Acknowledgements</h1>
+
+    <div class="ack-tier">
+      <div class="tier-label" data-i18n="ack.tier1Label">with the guidance of</div>
+      <div class="ack-t1">
+        <span>Sébastien Masin <span style="font-style:italic;color:var(--ink-soft);font-size:1rem;" data-i18n="ack.principalRole">— Principal</span></span>
+        <span>Fréderique Castelot Özdemir & Ozan Erdal <span style="font-style:italic;color:var(--ink-soft);font-size:1rem;" data-i18n="ack.supervisorRole">— Project Supervisor</span></span>
+      </div>
+    </div>
+
+    <div class="ack-tier">
+      <div class="tier-label" data-i18n="ack.tier2Label">the biology department & the working team</div>
+      <div class="ack-t2" id="ackTeam"></div>
+    </div>
+
+    <div class="ack-tier">
+      <div class="tier-label" data-i18n="ack.tier3Label">and with thanks to</div>
+      <div class="ack-t3" id="ackHelpers"></div>
+    </div>
+
+    <div class="ack-tier">
+      <div class="tier-label" data-i18n="ack.tier4Label">everyone who joined the workshop</div>
+      <p class="ack-note" data-i18n="ack.workshopNote">[A sentence of thanks to everyone who took part in the workshop.]</p>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="view" id="view-resources">
+    <div class="kicker" data-i18n="resources.kicker">further reading and references</div>
+    <h1 data-i18n="resources.title">Resources</h1>
+    <p class="lead" data-i18n="resources.lead">Sources behind the identifications and records in this collection, and places to read more.</p>
+    <div class="res-list" id="resList"></div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div>
+      <h4 data-i18n="footer.title">Cabinet Restored</h4>
+      <p class="t2" data-i18n="footer.tagline">A natural history collection, cleaned, logged and reopened by one student.</p>
+    </div>
+    <div>
+      <h4 data-i18n="footer.contactTitle">Contact</h4>
+      <p class="t2">+90 212 244 10 26<br>gulizakar8@gmail.com<br></p>
+    </div>
+    <div>
+      <h4 data-i18n="footer.moreTitle">Elsewhere</h4>
+      <p class="t2" data-i18n="footer.moreText">[Instagram / other project links, once ready]</p>
+    </div>
+  </div>
+  <div class="wrap"><p class="foot-note" data-i18n="footer.note">This collection is still being identified and documented. If you can help correct or add to a specimen's identification, sex, or any other fact, your contribution would be greatly appreciated. Please feel free to write to me at [email@example.com].</p></div>
+  <div class="fine"><button class="foot-link" data-goto="resources" data-i18n="nav.resources">Resources</button></div>
+  <div class="fine" style="margin-top:10px;" data-i18n="footer.fine">© Beyoğlu 2026</div>
+</footer>
+
+<script>
+/* ======================= DATA ======================= */
+
+/* HOME PAGE HERO PHOTO: put the photo in your "images" folder and write its name here,
+   e.g. 'images/hero.jpg'. Leave it as '' to show the placeholder frame.
+   HERO_FOCUS chooses which part of the photo stays visible when the wide banner trims it:
+   'center', 'top', 'bottom', 'left', 'right', or something like '50% 30%'. */
+const HERO_PHOTO = 'images/coll_overview.jpg';
+const HERO_FOCUS = '50% 50%';
+
+/* To add photos to a specimen, put the image files in an "images" folder next to this file
+   and list them in the "photos" array. The FIRST one is the hero shot, e.g.
+   photos:['images/testudo-1.jpg','images/testudo-2.jpg','images/testudo-3.jpg']
+   Leave it as [] to show placeholder frames.
+   sex is 'male', 'female' or 'unknown'. status is 'lc','nt','vu','en2','cr' or 'dd'. */
+const SPECIES = [
+    {id:"chroicocephalus-ridibundus", cls:"Aves", sci:"Chroicocephalus ridibundus", acc:"OIS.0001", sex:"unknown", juvenile:true, status:"lc",
+    photos:["images/OIS.0001.1.jpg", "images/OIS.0001.2.jpg", "images/OIS.0001.3.jpg", "images/OIS.0001.4.jpg"],
+    common:{en:"Black-headed gull", tr:"Karabaş martı", fr:"Mouette rieuse"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"genus-larus", cls:"Aves", sci:"Genus Larus", acc:"OIS.0002", sex:"female", juvenile:false, status:"lc",
+    photos:["images/OIS.0002.1.jpg", "images/OIS.0002.2.jpg", "images/OIS.0002.3.jpg", "images/OIS.0002.4.jpg"],
+    common:{en:"", tr:"", fr:""},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"falco-columbarius", cls:"Aves", sci:"Falco columbarius", acc:"OIS.0004", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0004.1.jpg", "images/OIS.0004.2.jpg", "images/OIS.0004.3.jpg", "images/OIS.0004.4.jpg", "images/OIS.0004.5.jpg"],
+    common:{en:"Merlin", tr:"Boz doğan", fr:"Faucon émerillon"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"falco-columbarius", cls:"Aves", sci:"Falco columbarius", acc:"OIS.0005", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0005.1.jpg", "images/OIS.0005.2.jpg", "images/OIS.0005.3.jpg"],
+    common:{en:"Merlin", tr:"Boz doğan", fr:"Faucon émerillon"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"chlidonias-niger", cls:"Aves", sci:"Chlidonias niger", acc:"OIS.0006", sex:"unknown", juvenile:true, status:"lc",
+    photos:["images/OIS.0006.1.jpg", "images/OIS.0006.2.jpg", "images/OIS.0006.3.jpg"],
+    common:{en:"Black tern", tr:"Kara sumru", fr:"Guifette noire"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"phasianus-colchicus", cls:"Aves", sci:"Phasianus colchicus", acc:"OIS.0007", sex:"male", juvenile:false, status:"lc",
+    photos:["images/OIS.0007.1.jpg", "images/OIS.0007.2.jpg", "images/OIS.0007.3.jpg"],
+    common:{en:"Ring-necked pheasant", tr:"Halka boyunlu sülün", fr:"Faisan de Colchide"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"calidris-alba", cls:"Aves", sci:"Calidris alba", acc:"OIS.0009", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0009.1.jpg", "images/OIS.0009.2.jpg", "images/OIS.0009.3.jpg", "images/OIS.0009.4.jpg"],
+    common:{en:"Sanderling", tr:"Ak kumkuşu", fr:"Bécasseau sanderling"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"turdus-pilaris", cls:"Aves", sci:"Turdus pilaris", acc:"OIS.0010", sex:"female", juvenile:false, status:"lc",
+    photos:["images/OIS.0010.1.jpg", "images/OIS.0010.2.jpg", "images/OIS.0010.3.jpg", "images/OIS.0010.4.jpg"],
+    common:{en:"Fieldfare", tr:"Tarla ardıç kuşu", fr:"Grive litorne"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"falco-tinnunculus", cls:"Aves", sci:"Falco tinnunculus", acc:"OIS.0011", sex:"female", juvenile:false, status:"lc",
+    photos:["images/OIS.0011.1.jpg", "images/OIS.0011.2.jpg", "images/OIS.0011.3.jpg"],
+    common:{en:"Common kestrel", tr:"Kerkenez", fr:"Faucon crécerelle"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"burhinus-oedicnemus", cls:"Aves", sci:"Burhinus oedicnemus", acc:"OIS.0012", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0012.1.jpg", "images/OIS.0012.2.jpg", "images/OIS.0012.3.jpg", "images/OIS.0012.4.jpg"],
+    common:{en:"Eurasian stone-curlew", tr:"Bayağı kocagöz", fr:"Œdicnème criard"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+   {id:"larus-marinus", cls:"Aves", sci:"Larus marinus", acc:"OIS.0013", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0013.1.jpg", "images/OIS.0013.2.jpg", "images/OIS.0013.3.jpg"],
+    common:{en:"Great black-backed gull", tr:"Büyük kara sırtlı martı", fr:"Goéland marin"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"lanius-excubitor", cls:"Aves", sci:"Lanius excubitor", acc:"OIS.0014", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0014.1.jpg", "images/OIS.0014.2.jpg", "images/OIS.0014.3.jpg", "images/OIS.0014.4.jpg"],
+    common:{en:"Great grey shrike", tr:"Büyük örümcek kuşu", fr:"Pie-grièche gris"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"recurvirostra-avosetta", cls:"Aves", sci:"Recurvirostra avosetta", acc:"OIS.0015", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0015.1.jpg", "images/OIS.0015.2.jpg", "images/OIS.0015.3.jpg", "images/OIS.0015.4.jpg", "images/OIS.0015.5.jpg"],
+    common:{en:"Pied avocet", tr:"Bayağı kılıçgaga", fr:"Avocette élégante"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"circus-aeruginosus", cls:"Aves", sci:"Circus aeruginosus", acc:"OIS.0016", sex:"female", juvenile:false, status:"lc",
+    photos:["images/OIS.0016.1.jpg", "images/OIS.0016.2.jpg", "images/OIS.0016.3.jpg", "images/OIS.0016.4.jpg"],
+    common:{en:"Western marsh harrier", tr:"Kızıl tuygun", fr:"Busard des roseaux"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"asio-flammeus", cls:"Aves", sci:"Asio flammeus", acc:"OIS.0017", sex:"male", juvenile:false, status:"lc",
+    photos:["images/OIS.0017.1.jpg", "images/OIS.0017.2.jpg", "images/OIS.0017.3.jpg", "images/OIS.0017.4.jpg"],
+    common:{en:"Short-eared owl", tr:"Kır baykuşu", fr:"Hibou de marais"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"pluvialis-apricaria", cls:"Aves", sci:"Pluvialis apricaria", acc:"OIS.0018", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0018.1.jpg", "images/OIS.0018.2.jpg", "images/OIS.0018.3.jpg", "images/OIS.0018.4.jpg"],
+    common:{en:"European golden plover", tr:"Altın yağmurcun", fr:"Pluvier doré"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"genus-falco", cls:"Aves", sci:"Genus Falco", acc:"OIS.0019", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/OIS.0019.1.jpg", "images/OIS.0019.2.jpg", "images/OIS.0019.3.jpg", "images/OIS.0019.4.jpg"],
+    common:{en:"", tr:"", fr:""},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"neophron-percnopterus", cls:"Aves", sci:"Neophron percnopterus", acc:"OIS.0020", sex:"unknown", juvenile:false, status:"en2",
+    photos:["images/OIS.0020.1.jpg", "images/OIS.0020.2.jpg", "images/OIS.0020.3.jpg", "images/OIS.0020.4.jpg", "images/OIS.0020.5.jpg"],
+    common:{en:"Egyptian vulture", tr:"Mısır akbabası", fr:"Vautour percnoprère"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"buteo-buteo", cls:"Aves", sci:"Buteo buteo", acc:"OIS.0022", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/866A3510.jpg", "images/866A3504.jpg", "images/866A3507.jpg", "images/866A3511.jpg"],
+    common:{en:"Common buzzard", tr:"Bayağı şahin", fr:"Buse variable"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"chlidonias-leucopterus", cls:"Aves", sci:"Chlidonias leucopterus", acc:"OIS.0023", sex:"unknown", juvenile:true, status:"lc",
+    photos:["images/866A3580.jpg", "images/866A3581.jpg", "images/866A3583.jpg", "images/866A3584.jpg", "images/866A3585.jpg"],
+    common:{en:"White-winged tern", tr:"Ak kanatlı sumru", fr:"Guifette leucoptère"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"glareola-pratincola", cls:"Aves", sci:"Glareola pratincola", acc:"OIS.0024", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/866A3686.jpg", "images/866A3690.jpg", "images/866A3688.jpg", "images/866A3691.jpg"],
+    common:{en:"Collared pratincole", tr:"Bataklık kırlangıcı", fr:"Glaréole à collier"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"caprimulgus-europaeus", cls:"Aves", sci:"Caprimulgus europaeus", acc:"OIS.0026", sex:"female", juvenile:false, status:"lc",
+    photos:["images/866A3650.jpg", "images/866A3649.jpg", "images/866A3652.jpg"],
+    common:{en:"European nightjar", tr:"Bayağı çobanaldatan", fr:"Engoulevent d'Europe"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"charadrius-morinellus", cls:"Aves", sci:"Charadrius morinellus", acc:"OIS.0029", sex:"male", juvenile:false, status:"lc",
+    photos:["images/866A3692.jpg", "images/866A3694.jpg", "images/866A3695.jpg"],
+    common:{en:"Eurasian dotterel", tr:"Dağ cılıbıtı", fr:"Pluvier guignard"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+    {id:"turdus-viscivorus", cls:"Mammalia", sci:"Turdus viscivorus", acc:"OIS.0030", sex:"unknown", juvenile:false, status:"lc",
+    photos:["images/866A3716.jpg", "images/866A3706.jpg", "images/866A3712.jpg", "images/866A3713.jpg", "images/866A3709.jpg"],
+    common:{en:"Mistle thrush", tr:"Ökse ardıcı", fr:"Grive draine"},
+    desc:{en:"",
+          tr:"",
+          fr:""}},
+  
+  
+  
+  
+];
+
+const STATUS_LABEL = {
+  en:{lc:'Least Concern', nt:'Near Threatened', vu:'Vulnerable', en2:'Endangered', cr:'Critically Endangered', dd:'Data Deficient'},
+  tr:{lc:'Düşük endişe', nt:'Neredeyse tehdit altında', vu:'Savunmasız', en2:'Tehlikede', cr:'Kritik tehlikede', dd:'Eksik verili'},
+  fr:{lc:'Préoccupation mineure', nt:'Quasi menacé', vu:'Vulnérable', en2:'En danger', cr:'En danger critique', dd:'Données insuffisantes'}
+};
+const SEX_LABEL = {
+  en:{male:'Male',female:'Female',unknown:'Undetermined'},
+  tr:{male:'Erkek',female:'Dişi',unknown:'Belirsiz'},
+  fr:{male:'Mâle',female:'Femelle',unknown:'Indéterminé'}
+};
+const CLASS_LABEL = {
+  en:{Mammalia:'Mammals',Aves:'Birds',Reptilia:'Reptiles',Amphibia:'Amphibians'},
+  tr:{Mammalia:'Memeliler',Aves:'Kuşlar',Reptilia:'Sürüngenler',Amphibia:'Amfibiler'},
+  fr:{Mammalia:'Mammifères',Aves:'Oiseaux',Reptilia:'Reptiles',Amphibia:'Amphibiens'}
+};
+
+const T = {
+en:{
+  nav:{home:'Home',about:'About',history:'History',explore:'Explore',tree:'Tree of Life',behind:'Behind the Scenes',ack:'Acknowledgements',resources:'Resources'},
+  brand:{sub:'Saint Benoît High School Natural History Collection'},
+  home:{heroCaption:'[photo]', kicker:'[text]', title:'[text]',
+    lead:'This collection, which had been in storage for a long time, was cleaned, identified, cataloged, and photographed piece by piece. It is now on display for anyone interested to examine.',
+    waysTitle:'Two ways to explore', waysText:'Browse the collection as a catalogue, specimen by specimen, or follow the tree of life to see how every specimen is related.',
+    exploreBtn:'See the collection', treeBtn:'See the tree of life',
+    aboutTitle:'[text]', aboutText:'[text]',
+    highlightsTitle:'From the collection'},
+  about:{kicker:'about the project', title:'About', portraitCaption:'[photo]',
+    bio:'[info]',
+    forewordProject:'[foreword of the project]',
+    forewordProjectWho:'— [name]',
+    forewordSupervisor:"[text]",
+    forewordSupervisorWho:"— [name]",
+    forewordPrincipal:"[text]",
+    forewordPrincipalWho:"— [name]"},
+  history:{kicker:'where the collection came from', title:'History',
+    lead:"[explanation of how the collection was researched]",
+    quote:'"[A line from the interview]"',
+    quoteSrc:"— [source]",
+    closing:"[Closing paragraph connecting the collection's past to the restoration project and why it mattered to bring it back.]"},
+  explore:{kicker:'the catalogue', title:'Explore the collection', lead:'Every specimen below has been cleaned, identified and logged. Select one to see its full record.', all:'All'},
+  specimen:{back:'← back to the catalogue', sciLabel:'Scientific name', sexLabel:'Sex', ageLabel:'Age', juvenile:'Juvenile', adult:'Adult', statusLabel:'Conservation status', accLabel:'Accession no.'},
+  tree:{kicker:'an alternative route through the collection', title:'Tree of life',
+    lead:'Rather than browsing by shelf, follow the branches below to see how the specimens in this collection relate to one another. Select any name to open its record. [detaylanacak]'},
+  behind:{kicker:'the restoration itself', title:'Behind the scenes', lead:'[text]',
+    cleaningTitle:'Cleaning and stabilising', baTitle:'Before and after', beforeCaption:'before', afterCaption:'after',
+    workshopTitle:'The workshop', workshopText:'[explanation]',
+    cleaning1:'[caption]', cleaning2:'[caption]', cleaning3:'[caption]',
+    workshop1:'[photo]', workshop2:'[photo]', workshop3:'[photo]'},
+  ack:{kicker:'', title:'Acknowledgements', tier1Label:'with the guidance of', principalRole:'— Principal', supervisorRole:'— Project Supervisors',
+    tier2Label:'the biology department & the working team', tier3Label:'and with thanks to', tier4Label:'Saint Benoît 247 student who joined the workshop', workshopNote:'and everyone who took part in the project...'},
+  resources:{kicker:'further reading and references', title:'Resources', lead:'Sources behind the identifications and records in this collection, and places to read more.'},
+  footer:{title:'Collection d\'histoire naturelle du Lycée Saint Benoît', tagline:'[logo gelir muhtemelen / reformat]',
+    contactTitle:'Contact', moreTitle:'Address', moreText:'Kemeraltı Caddesi No: 11, Müeyyetzade Mahallesi, 34425 Karaköy - Beyoğlu / İstanbul',
+    note:"This collection is still being identified and documented. If you have a correction or addition you would like to make to the information entries, emailing me at gulizakar8@gmail.com would be highly encouraged and appreciated.",
+    fine:'© Saint Benoît French High School, Istanbul - 2026'}
+},
+tr:{
+  nav:{home:'Ana Sayfa',about:'Hakkında',history:'Tarihçe',explore:'Koleksiyonu Keşfet',tree:'Yaşam Ağacı',behind:'Perde Arkası',ack:'Teşekkürler',resources:'Kaynaklar'},
+  brand:{sub:'Saint Benoît Lisesi Tabiat Tarihi Koleksiyonu'},
+  home:{heroCaption:'[photo]', kicker:'[text]', title:'[text]',
+    lead:'Uzun süredir depoda saklanan bu koleksiyon, titizlikle temizlendi, teşhis edildi, kaydedildi ve fotoğraflandı. Artık merak eden herkesin incelemesi için gözler önünde.',
+    waysTitle:'İki farklı keşif yolu', waysText:'Koleksiyonu bir katalog gibi, örnek örnek inceleyebilir ya da yaşam ağacını takip edebilir ve tüm örneklerin birbiriyle ilişkisini görebilirsiniz.',
+    exploreBtn:'Koleksiyonu gör', treeBtn:'Yaşam ağacını gör',
+    aboutTitle:'[text]', aboutText:'[text]',
+    highlightsTitle:'Koleksiyondan'},
+  about:{kicker:'proje hakkında', title:'Hakkında', portraitCaption:'[photo]',
+    bio:'[info]',
+    forewordProject:'[foreword of the project]',
+    forewordProjectWho:'— [name]',
+    forewordSupervisor:'[text]',
+    forewordSupervisorWho:'— [name]',
+    forewordPrincipal:'[text]',
+    forewordPrincipalWho:'— [name]'},
+  history:{kicker:'koleksiyonun başlangıcı hakkında', title:'Tarihçe',
+    lead:'[explanation of how the collection was researched]',
+    quote:'"[A line from the interview]"',
+    quoteSrc:'— [source]',
+    closing:'[Koleksiyonun geçmişini restorasyon projesine bağlayan kapanış paragrafı.]'},
+  explore:{kicker:'katalog', title:'Koleksiyonu keşfet', lead:'Aşağıdaki her örnek temizlendi, teşhis edildi ve kaydedildi. Tam kaydını görmek için birini seçin.', all:'Tümü'},
+  specimen:{back:'← kataloğa dön', sciLabel:'Bilimsel adı', sexLabel:'Cinsiyeti', ageLabel:'Yaş', juvenile:'Yavru', adult:'Yetişkin', statusLabel:'Koruma durumu', accLabel:'Envanter no.'},
+  tree:{kicker:'koleksiyonda alternatif bir yol', title:'Yaşam ağacı',
+    lead:'Rafları dolaşmak yerine, koleksiyondaki örneklerin birbiriyle nasıl ilişkili olduğunu görmek için aşağıdaki dalları takip edin. Kaydını açmak için bir isme tıklayın. [detaylanacak]'},
+  behind:{kicker:'restorasyonun hakkında', title:'Perde arkası', lead:'[text]',
+    cleaningTitle:'[caption]', baTitle:'Öncesi ve sonrası', beforeCaption:'öncesi', afterCaption:'sonrası',
+    workshopTitle:'Atölye çalışmaları', workshopText:"[explanation]",
+    cleaning1:'[caption]', cleaning2:'[caption]', cleaning3:'[caption]',
+    workshop1:'[photo]', workshop2:'[photo]', workshop3:'[photo]'},
+  ack:{kicker:'', title:'Teşekkürler', tier1Label:'Rehberliği altında bulunduğum', principalRole:'— Okul Müdürü', supervisorRole:'— Proje Danışmanları',
+    tier2Label:'biyoloji zümresi ve çalışma ekibim', tier3Label:'araştırma, iletişim, kataloglama, ve düzenleme  konusunda yardımı dokunan', tier4Label:'ve atölyelere katılan Saint Benoît 247 öğrencileri', workshopNote:'başta olmak üzere projede emeği geçen herkese derin minnetlerimi sunarım...'},
+  resources:{kicker:'ek okumalar ve kaynakça', title:'Kaynaklar', lead:'Bu koleksiyondaki teşhislerin ve kayıtların dayandığı kaynaklar ve daha fazlasını okuyabileceğiniz yerler.'},
+  footer:{title:'Collection d\'histoire naturelle du Lycée Saint Benoît', tagline:'[logo gelir muhtemelen / reformat]',
+    contactTitle:'İletişim', moreTitle:'Adres', moreText:'Kemeraltı Caddesi No: 11, Müeyyetzade Mahallesi, 34425 Karaköy - Beyoğlu / İstanbul',
+    note:'Bu koleksiyonun tanımlama ve kayıt çalışmaları halen sürmektedir. Bir örneğin bilgi girişi hakkında düzeltme veya ekleme yapmak isterseniz gulizakar8@gmail.com adresinden bana ulașmanız şiddetle tavsiye edilir ve memnuniyetle karşılanır.',
+    fine:'© Saint Benoît Fransız Lisesi, İstanbul - 2026'}
+},
+fr:{
+  nav:{home:'Accueil',about:'À propos',history:'Histoire',explore:'Explorer la collection',tree:"Arbre du vivant",behind:'Coulisses',ack:'Remerciements',resources:'Ressources'},
+  brand:{sub:'  '},
+  home:{heroCaption:'[photo]', kicker:'[text]', title:'[text]',
+    lead:"Cette collection, conservée depuis longtemps en entrepôt, a été soigneusement nettoyée, identifiée, répertoriée et photographiée. Elle est désormais accessible à tous ceux qui souhaitent la découvrir.",
+    waysTitle:'Deux façons de découvrir', waysText:"Parcourez la collection comme un catalogue, spécimen par spécimen, ou suivez l'arbre du vivant pour voir comment tout est lié.",
+    exploreBtn:'Voir la collection', treeBtn:"Voir l'arbre du vivant",
+    aboutTitle:'[text]', aboutText:'[text]',
+    highlightsTitle:'De la collection'},
+  about:{kicker:'à propos du projet', title:'À propos', portraitCaption:'[photo]',
+    bio:'[info]',
+    forewordProject:'[foreword of the project]',
+    forewordProjectWho:'— [name]',
+    forewordSupervisor:'[text]',
+    forewordSupervisorWho:'— [name]',
+    forewordPrincipal:'[text]',
+    forewordPrincipalWho:'— [name]'},
+  history:{kicker:"d'où vient la collection", title:'Histoire',
+    lead:'[explanation of how the collection was researched]',
+    quote:'"[A line from the interview]"',
+    quoteSrc:'— [source]',
+    closing:"[Paragraphe de conclusion établissant un lien entre l'histoire de la collection et le projet de restauration.]"},
+  explore:{kicker:'le catalogue', title:'Explorer la collection', lead:'Chaque spécimen ci-dessous a été nettoyé, identifié et catalogué. Sélectionnez-en un pour voir sa fiche complète.', all:'Tous'},
+  specimen:{back:'← retour au catalogue', sciLabel:'Nom scientifique', sexLabel:'Sexe', ageLabel:'Âge', juvenile:'Juvénile', adult:'Adulte', statusLabel:'Statut de conservation', accLabel:'N° d\'inventaire'},
+  tree:{kicker:'un autre chemin dans la collection', title:'Arbre du vivant',
+    lead:"Plutôt que de parcourir les étagères, suivez les branches ci-dessous pour voir comment les spécimens de cette collection sont liés entre eux. Sélectionnez un nom pour ouvrir sa fiche. [detaylanacak]"},
+  behind:{kicker:'la restauration elle-même', title:'Coulisses', lead:"[text]",
+    cleaningTitle:'[caption]', baTitle:'Avant et après', beforeCaption:'avant', afterCaption:'après',
+    workshopTitle:"L'atelier", workshopText:"[explanation]",
+    cleaning1:'[caption]', cleaning2:'[caption]', cleaning3:'[caption]',
+    workshop1:'[photo]', workshop2:'[photo]', workshop3:'[photo]'},
+  ack:{kicker:"", title:'Remerciements', tier1Label:'sous la direction de', principalRole:'— Directeur', supervisorRole:'— Superviseurs de projet',
+    tier2Label:"le département de biologie et l'équipe de travail", tier3Label:'ainsi qu\'avec mes remerciements à', tier4Label:"les élèves de Saint Benoît 247", workshopNote:'ainsi qu\'à toutes les personnes qui ont participé d\'une manière ou d\'une autre à ce projet...'},
+  resources:{kicker:'pour aller plus loin', title:'Ressources', lead:"Les sources des identifications et des fiches de cette collection, et des lectures pour aller plus loin."},
+  footer:{title:'Collection d\'histoire naturelle du Lycée Saint Benoît', tagline:"[logo gelir muhtemelen / reformat]",
+    contactTitle:'Contact', moreTitle:'Adresse', moreText:'Kemeraltı Caddesi No: 11, Müeyyetzade Mahallesi, 34425 Karaköy - Beyoğlu / İstanbul',
+    note:"Cette collection est encore en cours d'identification et de documentation. Si vous souhaitez apporter une correction ou un complément aux informations fournies, n'hésitez pas à m'envoyer un e-mail à l'adresse gulizakar8@gmail.com ; votre contribution sera vivement encouragée et appréciée.",
+    fine:'© Lycée Français Saint Benoît, Istanbul - 2026'}
+}
+};
+
+let LANG = 'en';
+let currentView = 'home';
+let currentClassFilter = 'all';
+
+/* ======================= HELPERS ======================= */
+
+/* Every specimen page is identified by its accession number (acc), so it must be unique.
+   The "id" field in each entry is no longer used and can be left or deleted. */
+function specKey(s){ return s.acc; }
+(function(){
+  const seen = {};
+  SPECIES.forEach(s=>{
+    if(!s.acc || seen[s.acc]) console.warn('Accession number missing or repeated: '+(s.acc||s.sci));
+    seen[s.acc] = true;
+  });
+})();
+
+function ph(label){
+  return '<div class="frame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span>'+label+'</span></div>';
+}
+
+function safeSrc(src){
+  if(/^(https?:|data:|blob:)/i.test(src)) return src;
+  return src.split('/').map(seg=>{
+    let d = seg; try{ d = decodeURIComponent(seg); }catch(e){}
+    return encodeURIComponent(d);
+  }).join('/');
+}
+
+function photoFrame(src,label){
+  if(!src) return ph(label);
+  src = safeSrc(src);
+  return '<div class="frame photo"><img src="'+src+'" alt="'+label+'"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></div>';
+}
+
+function renderHero(){
+  if(!HERO_PHOTO) return;
+  const f = document.getElementById('heroFrame');
+  f.classList.add('photo');
+  f.innerHTML = '<img src="'+safeSrc(HERO_PHOTO)+'" alt="'+t('home.title')+'" style="object-position:'+HERO_FOCUS+';">'+
+    '<span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>';
+}
+
+function t(path){
+  const parts = path.split('.');
+  let node = T[LANG];
+  for(const p of parts){ node = node && node[p]; }
+  return node || path;
+}
+
+function applyI18n(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+  });
+  document.querySelectorAll('#langSwitch button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang===LANG);
+  });
+  renderNav();
+  renderHighlights();
+  renderHistory();
+  renderFilters();
+  renderSpecimenGrid();
+  renderTree();
+  renderAck();
+  renderBehind();
+  renderResources();
+  renderHero();
+  if(currentView==='specimen' && window._openSpecimen) renderSpecimenDetail(window._openSpecimen);
+}
+
+/* ======================= NAV ======================= */
+
+const NAV_ORDER = ['home','about','history','explore','tree','behind','ack'];
+
+function renderNav(){
+  const nav = document.getElementById('mainNav');
+  nav.innerHTML = NAV_ORDER.map(id=>
+    '<button data-goto="'+id+'" class="'+(currentView===id?'active':'')+'">'+t('nav.'+id)+'</button>'
+  ).join('');
+}
+
+function goto(view){
+  currentView = view;
+  document.querySelectorAll('section.view').forEach(s=>s.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  renderNav();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('[data-goto]');
+  if(btn){ goto(btn.dataset.goto); }
+  const langBtn = e.target.closest('[data-lang]');
+  if(langBtn){ LANG = langBtn.dataset.lang; applyI18n(); }
+});
+
+/* ======================= HOME HIGHLIGHTS ======================= */
+
+function renderHighlights(){
+  const el = document.getElementById('homeHighlights');
+  const picks = SPECIES.slice(0,3);
+  el.innerHTML = picks.map(s=>
+    '<div class="h-card" data-open="'+specKey(s)+'">'+photoFrame((s.photos||[])[0],'specimen photo')+
+    '<div class="sci">'+s.sci+'</div><h4>'+s.common[LANG]+'</h4></div>'
+  ).join('');
+  el.querySelectorAll('[data-open]').forEach(c=>{
+    c.style.cursor='pointer';
+    c.addEventListener('click', ()=>{ openSpecimen(c.dataset.open); });
+  });
+}
+
+/* ======================= HISTORY TIMELINE ======================= */
+
+const TIMELINE = [
+  {yr:'[year]', key:'origin'},
+  {yr:'[year]', key:'storage'},
+  {yr:'[year – present]', key:'restoration'}
+];
+const TIMELINE_TEXT = {
+  en:{origin:'[How and why the collection was originally assembled.]',
+      storage:'[How it came to be locked away, and for how long.]',
+      restoration:'[How the restoration project began, and how it has unfolded.]'},
+  tr:{origin:'[Koleksiyonun başlangıçta nasıl ve neden bir araya getirildiği.]',
+      storage:'[Nasıl ve ne kadar süreyle kilit altında kaldığı.]',
+      restoration:'[Restorasyon projesinin nasıl başladığı ve nasıl ilerlediği.]'},
+  fr:{origin:"[Comment et pourquoi la collection a été constituée à l'origine.]",
+      storage:"[Comment et pendant combien de temps elle est restée enfermée.]",
+      restoration:'[Comment le projet de restauration a commencé et évolué.]'}
+};
+function renderHistory(){
+  const el = document.getElementById('historyTimeline');
+  el.innerHTML = TIMELINE.map(item=>
+    '<div class="t-item"><div class="yr">'+item.yr+'</div><p>'+TIMELINE_TEXT[LANG][item.key]+'</p></div>'
+  ).join('');
+}
+
+/* ======================= EXPLORE / FILTERS ======================= */
+
+function renderFilters(){
+  const classes = ['all', ...new Set(SPECIES.map(s=>s.cls))];
+  const el = document.getElementById('classFilters');
+  el.innerHTML = classes.map(c=>
+    '<button data-cls="'+c+'" class="'+(currentClassFilter===c?'active':'')+'">'+
+    (c==='all'? t('explore.all') : (CLASS_LABEL[LANG][c]||c)) + '</button>'
+  ).join('');
+  el.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click', ()=>{ currentClassFilter=b.dataset.cls; renderFilters(); renderSpecimenGrid(); });
+  });
+}
+
+function renderSpecimenGrid(){
+  const el = document.getElementById('specimenGrid');
+  const list = SPECIES.filter(s=> currentClassFilter==='all' || s.cls===currentClassFilter);
+  el.innerHTML = list.map(s=>
+    '<div class="spec-card" data-open="'+specKey(s)+'">'+photoFrame((s.photos||[])[0],'specimen photo')+
+    '<div class="body"><div class="sci">'+s.sci+'</div><h4>'+s.common[LANG]+'</h4></div></div>'
+  ).join('');
+  el.querySelectorAll('[data-open]').forEach(c=>{
+    c.addEventListener('click', ()=>openSpecimen(c.dataset.open));
+  });
+}
+
+function openSpecimen(id){
+  window._openSpecimen = id;
+  renderSpecimenDetail(id);
+  goto('specimen');
+}
+
+function renderSpecimenDetail(id){
+  const s = SPECIES.find(x=>specKey(x)===id);
+  if(!s) return;
+  const el = document.getElementById('specimenDetail');
+  const photos = s.photos || [];
+  const ageLabel = s.juvenile ? t('specimen.juvenile') : t('specimen.adult');
+  const sym = {male:'\u2642', female:'\u2640', unknown:'?'}[s.sex];
+  const symName = SEX_LABEL[LANG][s.sex];
+  const sexRow = (s.sex==='male' || s.sex==='female')
+    ? '<dt>'+t('specimen.sexLabel')+'</dt><dd><span class="sex-sym" title="'+symName+'" aria-label="'+symName+'">'+sym+'</span></dd>'
+    : '';
+  const thumbs = photos.length
+    ? photos.map((p,i)=>'<div data-i="'+i+'">'+photoFrame(p,'photo '+(i+1))+'</div>').join('')
+    : ph('photo 1')+ph('photo 2')+ph('photo 3')+ph('photo 4');
+  el.innerHTML =
+    '<div class="spec-hero"><div id="heroSlot">'+photoFrame(photos[0],'hero photograph')+'</div>'+
+    '<div class="filmstrip">'+thumbs+'</div></div>'+
+    '<div class="catalog-card">'+
+      '<div class="acc">'+t('specimen.accLabel')+' &nbsp;'+s.acc+'</div>'+
+      '<h2>'+s.sci+'</h2><div class="common">'+s.common[LANG]+'</div>'+
+      '<dl class="kv">'+
+        sexRow+
+        '<dt>'+t('specimen.ageLabel')+'</dt><dd>'+ageLabel+'</dd>'+
+        '<dt>'+t('specimen.statusLabel')+'</dt><dd style="font-size:.88rem;color:var(--ink-soft);"><span class="status-dot '+s.status+'"></span>'+STATUS_LABEL[LANG][s.status]+'</dd>'+
+      '</dl>'+
+    '</div>'+
+    '<div class="spec-desc"><p>'+s.desc[LANG]+'</p></div>';
+  el.querySelectorAll('.filmstrip > div[data-i]').forEach(d=>{
+    d.addEventListener('click', ()=>{
+      document.getElementById('heroSlot').innerHTML = photoFrame(photos[+d.dataset.i],'hero photograph');
+    });
+  });
+}
+
+/* ======================= TREE OF LIFE ======================= */
+
+function renderTree(){
+  const svg = document.getElementById('treeSvg');
+  const classes = [...new Set(SPECIES.map(s=>s.cls))];
+  const rowH = 52;
+  const topPad = 30;
+  const height = SPECIES.length*rowH + topPad*2;
+  svg.setAttribute('viewBox', '0 0 760 '+height);
+  svg.setAttribute('width','760'); svg.setAttribute('height', height);
+
+  let leafY = {};
+  let y = topPad;
+  let classLeaves = {};
+  classes.forEach(c=>{ classLeaves[c] = SPECIES.filter(s=>s.cls===c); });
+
+  let parts = [];
+  let leafPositions = [];
+  classes.forEach(c=>{
+    const leaves = classLeaves[c];
+    const startY = y;
+    leaves.forEach(s=>{
+      leafPositions.push({s, y});
+      y += rowH;
+    });
+    const endY = y - rowH;
+    const classY = (startY+endY)/2;
+    parts.push({type:'class', cls:c, y:classY});
+  });
+
+  const rootY = height/2;
+  const rootX = 40, classX = 300, leafX = 560;
+
+  let svgParts = [];
+  // root -> class links
+  parts.forEach(p=>{
+    svgParts.push('<path class="tree-link" d="M'+rootX+','+rootY+' C'+(rootX+120)+','+rootY+' '+(classX-120)+','+p.y+' '+classX+','+p.y+'"/>');
+  });
+  // class -> leaf links
+  leafPositions.forEach(lp=>{
+    const cls = parts.find(p=>p.cls===lp.s.cls);
+    svgParts.push('<path class="tree-link" d="M'+classX+','+cls.y+' C'+(classX+90)+','+cls.y+' '+(leafX-90)+','+lp.y+' '+leafX+','+lp.y+'"/>');
+  });
+  // root node
+  svgParts.push('<g class="tree-node"><circle cx="'+rootX+'" cy="'+rootY+'" r="7"/><text x="'+(rootX+14)+'" y="'+(rootY+5)+'" style="font-style:italic;">'+ (LANG==='tr'?'Koleksiyon':(LANG==='fr'?'Collection':'Collection')) +'</text></g>');
+  // class nodes
+  parts.forEach(p=>{
+    svgParts.push('<g class="tree-node class"><circle cx="'+classX+'" cy="'+p.y+'" r="6"/><text x="'+(classX+13)+'" y="'+(p.y+5)+'">'+(CLASS_LABEL[LANG][p.cls]||p.cls)+'</text></g>');
+  });
+  // leaf nodes
+  leafPositions.forEach(lp=>{
+    svgParts.push('<g class="tree-node" data-open="'+specKey(lp.s)+'" style="cursor:pointer;"><circle cx="'+leafX+'" cy="'+lp.y+'" r="5"/>'+
+      '<text x="'+(leafX+12)+'" y="'+(lp.y-1)+'">'+lp.s.common[LANG]+'</text>'+
+      '<text class="sci-t" x="'+(leafX+12)+'" y="'+(lp.y+15)+'">'+lp.s.sci+'</text></g>');
+  });
+
+  svg.innerHTML = svgParts.join('');
+  svg.querySelectorAll('[data-open]').forEach(node=>{
+    node.addEventListener('click', ()=>openSpecimen(node.getAttribute('data-open')));
+  });
+}
+
+/* ======================= RESOURCES ======================= */
+
+/* Add, remove or edit entries here. Leave url as '' for an entry without a link. */
+const RESOURCES = [
+  {url:'https://www.iucnredlist.org',
+   title:{en:'IUCN Red List of Threatened Species', tr:'IUCN Tehdit Altındaki Türler Kırmızı Listesi', fr:'Liste rouge de l\'UICN des espèces menacées'},
+   desc:{en:'The reference for the conservation status categories.', tr:'Koruma durumu kategorilerinin Türkçe karşılıkları, Anadolu Ajansı\'nın "yeşilhat" birimine ait <a href="https://www.aa.com.tr/tr/yesilhat/yesilsozluk/iucn-kirmizi-listesi/1820836" target="_blank" rel="noopener">yeşil sözlük</a> sayfasından temin edilmiştir.', fr:'La référence pour les catégories et traductions de statut de conservation est trouvée au <a href="https://portals.iucn.org/library/node/10337" target="_blank" rel="noopener">Système de bibliothèques de l\'UICN</a>.'}},
+  {url:'https://www.gbif.org',
+   title:{en:'GBIF, Global Biodiversity Information Facility', tr:'GBIF, Küresel Biyoçeşitlilik Bilgi Sistemi', fr:'GBIF, Système mondial d\'information sur la biodiversité'},
+   desc:{en:'An open database of species names and records.', tr:'Tür adları ve kayıtlarının açık veri tabanı.', fr:'Une base de données ouverte de noms et d\'observations d\'espèces.'}},
+  {url:'https://books.google.com.tr/books/about/Collins_Birds_of_the_World.html?id=LkttDwAAQBAJ&source=kp_book_description&redir_esc=y',
+   title:{en:'Collins Birds of the World', tr:'Collins Birds of the World', fr:'Collins Birds of the World'},
+   desc:{en:'[N. Arlot, B. van Perlo, 2021]', tr:'[N. Arlot, B. van Perlo, 2021]', fr:'[N. Arlot, B. van Perlo, 2021]'}},
+  {url:'',
+   title:{en:'', tr:'', fr:''},
+   desc:{en:'', tr:'', fr:''}}
+];
+
+function renderResources(){
+  document.getElementById('resList').innerHTML = RESOURCES.map(r=>{
+    const title = r.url
+      ? '<a href="'+r.url+'" target="_blank" rel="noopener">'+r.title[LANG]+'</a>'
+      : r.title[LANG];
+    return '<div class="res-item"><h3>'+title+'</h3><p>'+r.desc[LANG]+'</p></div>';
+  }).join('');
+}
+
+/* ======================= BEHIND THE SCENES ======================= */
+
+function renderBehind(){
+  document.getElementById('cleaningGrid').innerHTML =
+    ph(t('behind.cleaning1')) + ph(t('behind.cleaning2')) + ph(t('behind.cleaning3'));
+  document.getElementById('workshopGrid').innerHTML =
+    ph(t('behind.workshop1')) + ph(t('behind.workshop2')) + ph(t('behind.workshop3'));
+}
+
+const baRange = document.getElementById('baRange');
+const afterClip = document.getElementById('afterClip');
+const baDivider = document.getElementById('baDivider');
+baRange.addEventListener('input', ()=>{
+  afterClip.style.width = baRange.value+'%';
+  baDivider.style.left = baRange.value+'%';
+});
+
+/* ======================= ACKNOWLEDGEMENTS ======================= */
+
+const TEAM_NAMES = [
+'Jan Lelijours','İoanna Kamviseli Oflas',
+  'Hakan Alper Köse','Elif Öztürker','Bengisu Talya Horus','Berra Bostan',
+  'Derin Uzuner','İlsu Aydoğdu','Mehmet Kaşif Dönmez',
+];
+const HELPER_NAMES = [
+  'Benoit Gilles','Turgay Tuna','Natali Aşık Tömsü',
+  'Deniz Akgül', 'Nihal Yurdakul',
+  'Sinan Kocaaku','İrem Akev Uluç','İpek Gümüşoğlu','Serhat Yalamanoğlu'
+];
+function renderAck(){
+  document.getElementById('ackTeam').innerHTML = TEAM_NAMES.map(n=>'<div>'+n+'</div>').join('');
+  document.getElementById('ackHelpers').innerHTML = HELPER_NAMES.map(n=>'<div>'+n+'</div>').join('');
+}
+
+/* ======================= INIT ======================= */
+
+applyI18n();
+goto('home');
+
+</script>
+</body>
+</html>
