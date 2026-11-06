@@ -82,13 +82,8 @@
     display:flex;align-items:center;gap:20px;flex-wrap:wrap;
     padding:14px 28px 6px;max-width:1080px;margin:0 auto;
   }
-  .logo-slot{
-    width:46px;height:46px;flex:0 0 auto;
-    border:1px dashed var(--brass-dim);
-    display:flex;align-items:center;justify-content:center;
-    font-size:10px;color:var(--ink-soft);text-align:center;line-height:1.1;
-    font-family:"EB Garamond",serif;
-  }
+  .logo-slot{flex:0 0 auto;height:200px;display:flex;align-items:center;}
+  .logo-slot img{height:100%;width:auto;display:block;}
   .brand{flex:1 1 auto;}
   .brand .t1{font-family:"Cormorant Garamond",serif;font-size:1.5rem;line-height:1;color:var(--ink);}
   .brand .t2{font-size:.72rem;color:var(--ink-soft);font-style:italic;letter-spacing:.02em;}
@@ -300,7 +295,7 @@
 
 <header class="site">
   <div class="head-row">
-    <div class="logo-slot">logo<br>here</div>
+    <div class="logo-slot"><img src="images/logo.PNG" alt="MHNSB logo"></div>
     <div class="brand">
       <div class="t1">La musée d'histoire naturelle du Lycée Saint Benoît</div>
       <div class="t2" data-i18n="brand.sub">A natural history collection, rediscovered</div>
