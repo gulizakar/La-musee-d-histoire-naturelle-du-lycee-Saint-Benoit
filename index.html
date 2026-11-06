@@ -313,8 +313,8 @@
 
   <!-- HOME -->
   <section class="view" id="view-home">
-    <div class="hero">
-      <div class="frame" id="heroFrame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="home.heroCaption">hero photograph — collection overview</span></div>
+    <!-- <div class="hero">
+      <div class="frame" id="heroFrame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="home.heroCaption">hero photograph — collection overview</span></div> -->
       <div class="kicker" data-i18n="home.kicker">a student-led restoration</div>
       <h1 data-i18n="home.title">A locked cabinet, opened again</h1>
       <p class="lead" data-i18n="home.lead">For decades this collection sat sealed in storage. Piece by piece, it has been cleaned, identified, logged and photographed — and is now open to anyone curious enough to look closely.</p>
@@ -681,7 +681,7 @@ en:{
     lead:'This collection, which had been in storage for a long time, was cleaned, identified, cataloged, and photographed piece by piece. It is now on display for anyone interested to examine.',
     waysTitle:'Two ways to explore', waysText:'Browse the collection as a catalogue, specimen by specimen, or follow the tree of life to see how every specimen is related.',
     exploreBtn:'See the collection', treeBtn:'See the tree of life',
-    aboutTitle:'[text]', aboutText:'[text]',
+    aboutTitle:'Who made this website?', aboutText:'This website was created by Güliz Akar, a student who spent a year restoring the collection. The full story is on the About and Behind the Scenes pages.',
     highlightsTitle:'From the collection...'},
   about:{kicker:'about the project', title:'About', portraitCaption:'[photo]',
     bio:'[info]',
@@ -720,7 +720,7 @@ tr:{
     lead:'Uzun süredir depoda saklanan bu koleksiyon, titizlikle temizlendi, teşhis edildi, kaydedildi ve fotoğraflandı. Artık merak eden herkesin incelemesi için gözler önünde.',
     waysTitle:'İki farklı keşif yolu', waysText:'Koleksiyonu bir katalog gibi, örnek örnek inceleyebilir ya da yaşam ağacını takip edebilir ve tüm örneklerin birbiriyle ilişkisini görebilirsiniz.',
     exploreBtn:'Koleksiyonu gör', treeBtn:'Yaşam ağacını gör',
-    aboutTitle:'[text]', aboutText:'[text]',
+    aboutTitle:'Bu siteyi kim yaptı?', aboutText:'Bu site, bir yıl boyunca koleksiyonun restorasyonu ile ilgilenen Güliz Akar tarafından hazırlanmıştır. Hikayenin tamamına Hakkında ve Perde Arkası sayfalarından erişebilirsiniz.',
     highlightsTitle:'Koleksiyondan'},
   about:{kicker:'proje hakkında', title:'Hakkında', portraitCaption:'[photo]',
     bio:'[info]',
@@ -759,7 +759,7 @@ fr:{
     lead:"Cette collection, conservée depuis longtemps en entrepôt, a été soigneusement nettoyée, identifiée, répertoriée et photographiée. Elle est désormais accessible à tous ceux qui souhaitent la découvrir.",
     waysTitle:'Deux façons de découvrir', waysText:"Parcourez la collection comme un catalogue, spécimen par spécimen, ou suivez l'arbre du vivant pour voir comment tout est lié.",
     exploreBtn:'Voir la collection', treeBtn:"Voir l'arbre du vivant",
-    aboutTitle:'[text]', aboutText:'[text]',
+    aboutTitle:'Qui a créé ce site ?', aboutText:'Ce site a été créé par Güliz Akar, une élève qui a passé un an à restaurer la collection. L\'histoire complète est disponible sur les pages À propos et Coulisses.',
     highlightsTitle:'De la collection'},
   about:{kicker:'à propos du projet', title:'À propos', portraitCaption:'[photo]',
     bio:'[info]',
@@ -831,6 +831,7 @@ function photoFrame(src,label){
 function renderHero(){
   if(!HERO_PHOTO) return;
   const f = document.getElementById('heroFrame');
+  if(!f) return;
   f.classList.add('photo');
   f.innerHTML = '<img src="'+safeSrc(HERO_PHOTO)+'" alt="'+t('home.title')+'" style="object-position:'+HERO_FOCUS+';">'+
     '<span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>';
@@ -911,20 +912,20 @@ function renderHighlights(){
 /* ======================= HISTORY TIMELINE ======================= */
 
 const TIMELINE = [
-  {yr:'[year]', key:'origin'},
-  {yr:'[year]', key:'storage'},
-  {yr:'[year – present]', key:'restoration'}
+  {yr:'1840', key:'origin'},
+  {yr:'1899', key:'storage'},
+  {yr:'2025', key:'restoration'}
 ];
 const TIMELINE_TEXT = {
-  en:{origin:'[How and why the collection was originally assembled.]',
-      storage:'[How it came to be locked away, and for how long.]',
-      restoration:'[How the restoration project began, and how it has unfolded.]'},
-  tr:{origin:'[Koleksiyonun başlangıçta nasıl ve neden bir araya getirildiği.]',
-      storage:'[Nasıl ve ne kadar süreyle kilit altında kaldığı.]',
-      restoration:'[Restorasyon projesinin nasıl başladığı ve nasıl ilerlediği.]'},
-  fr:{origin:"[Comment et pourquoi la collection a été constituée à l'origine.]",
-      storage:"[Comment et pendant combien de temps elle est restée enfermée.]",
-      restoration:'[Comment le projet de restauration a commencé et évolué.]'}
+  en:{origin:'Amedée Alléon, a French naturalist, took interest in taxidermy when he was still young. He was especially interested in birds, and he collected and preserved many specimens',
+      storage:'English naturalist H. J. Elwes donated part of the collection to Saint Benoît High School, then known as the Lazarist College in Constantinople, in 1899,',
+      restoration:'Güliz, who saw the collection through the glass door for years, was curious about the specimens and wanted to learn more. She started a restoration project, which involved cleaning, identifying, cataloging, and photographing each specimen.'},
+  tr:{origin:'Fransız doğa bilimci Amedée Alléon, henüz genç yaşta iken taksidermiye ilgi duymaya başladı. Özellikle kuşlara ilgi duyuyordu ve birçok örneği topladı ve korudu.',
+      storage:'İngiliz doğa bilimci H. J. Elwes, koleksiyonun bir kısmını 1899 yılında, o zamanlar Konstantinopolis\'teki Lazarist Koleji olarak bilinen Saint Benoît Lisesi\'ne bağışladı.',
+      restoration:'Koleksiyonu yıllar boyuncacam kapının arkasında gören Güliz, örnekler hakkında meraklandı ve daha fazla bilgi edinmek istedi. Her bir örneği temizleme, teşhis etme, kataloglama ve fotoğraflama işlemlerini içeren bir restorasyon projesi başlattı.'},
+  fr:{origin:"Amedée Alléon, un naturaliste français, s'intéressait à la taxidermie dès son plus jeune âge. Il était particulièrement intéressé par les oiseaux et a collecté et préservé de nombreux spécimens.",
+      storage:"L'ornithologue anglais H. J. Elwes a fait don d'une partie de la collection au Lycée Saint Benoît, alors connu sous le nom de Collège Lazariste à Constantinople, en 1899.",
+      restoration:'Güliz, qui voyait la collection à travers la porte vitrée depuis des années, était curieuse des spécimens et voulait en savoir plus. Elle a lancé un projet de restauration, qui consistait à nettoyer, identifier, cataloguer et photographier chaque spécimen.'}
 };
 function renderHistory(){
   const el = document.getElementById('historyTimeline');
