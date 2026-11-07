@@ -274,6 +274,10 @@
   footer h4{font-size:1.05rem;margin-bottom:.5em;}
   footer .t2{color:var(--ink-soft);font-size:.9rem;}
   footer .fine{margin-top:26px;font-size:.78rem;color:var(--ink-soft);text-align:center;}
+    .foot-brand{display:flex;align-items:center;gap:16px;}
+  .foot-logo{height:80px;width:auto;display:block;flex:0 0 auto;}
+  .foot-name{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.25rem;line-height:1.2;color:var(--ink);}
+  .foot-name span{display:block;}
 
   /* photo boxes follow the 3:2 shape of the photos (1601 x 1068), so nothing is squashed or cropped */
   .spec-card .frame, .h-card .frame, .spec-hero .frame, .filmstrip .frame{
@@ -473,10 +477,13 @@
 
 <footer class="site">
   <div class="wrap foot-grid">
-    <div>
-      <h4 data-i18n="footer.title">Cabinet Restored</h4>
-      <p class="t2" data-i18n="footer.tagline">A natural history collection, cleaned, logged and reopened by one student.</p>
-    </div>
+      <div class="foot-brand">
+        <img class="foot-logo" src="images/logo.PNG" alt="MHNSB logo">
+        <div class="foot-name">
+          <span>Musée d'histoire naturelle</span>
+          <span>du Lycée Saint Benoît</span>
+        </div>
+      </div>
     <div>
       <h4 data-i18n="footer.contactTitle">Contact</h4>
       <p class="t2">+90 212 244 10 26<br>gulizakar8@gmail.com<br></p>
@@ -708,7 +715,7 @@ en:{
   ack:{kicker:'', title:'Acknowledgements', tier1Label:'with the guidance of', principalRole:'— Principal', supervisorRole:'— Project Supervisors',
     tier2Label:'the biology department & the working team', tier3Label:'and with thanks to', tier4Label:'Saint Benoît 247 student who joined the workshop', workshopNote:'and everyone who took part in the project...'},
   resources:{kicker:'further reading and references', title:'Resources', lead:'Sources behind the identifications and records in this collection, and places to read more.'},
-  footer:{title:'Musée d\'histoire naturelle du Lycée Saint Benoît', tagline:'[logo gelir muhtemelen / reformat]',
+  footer:{title:'La musée d\'histoire naturelle du Lycée Saint Benoît',
     contactTitle:'Contact', moreTitle:'Address', moreText:'Kemeraltı Caddesi No: 11, Müeyyetzade Mahallesi, 34425 Karaköy - Beyoğlu / İstanbul',
     note:"This collection is still being identified and documented. If you have a correction or addition you would like to make to the information entries, emailing me at gulizakar8@gmail.com would be highly encouraged and appreciated.",
     fine:'© Saint Benoît French High School, Istanbul - 2026'}
@@ -747,7 +754,7 @@ tr:{
   ack:{kicker:'', title:'Teşekkürler', tier1Label:'Rehberliği altında bulunduğum', principalRole:'— Okul Müdürü', supervisorRole:'— Proje Danışmanları',
     tier2Label:'biyoloji zümresi ve çalışma ekibim', tier3Label:'araştırma, iletişim, kataloglama, ve düzenleme  konusunda yardımı dokunan', tier4Label:'ve atölyelere katılan Saint Benoît 247 öğrencileri', workshopNote:'başta olmak üzere projede emeği geçen herkese derin minnetlerimi sunarım...'},
   resources:{kicker:'ek okumalar ve kaynakça', title:'Kaynaklar', lead:'Bu koleksiyondaki teşhislerin ve kayıtların dayandığı kaynaklar ve daha fazlasını okuyabileceğiniz yerler.'},
-  footer:{title:'Musée d\'histoire naturelle du Lycée Saint Benoît', tagline:'[logo gelir muhtemelen / reformat]',
+  footer:{title:'La musée d\'histoire naturelle du Lycée Saint Benoît',
     contactTitle:'İletişim', moreTitle:'Adres', moreText:'Kemeraltı Caddesi No: 11, Müeyyetzade Mahallesi, 34425 Karaköy - Beyoğlu / İstanbul',
     note:'Bu koleksiyonun tanımlama ve kayıt çalışmaları halen sürmektedir. Bir örneğin bilgi girişi hakkında düzeltme veya ekleme yapmak isterseniz gulizakar8@gmail.com adresinden bana ulașmanız şiddetle tavsiye edilir ve memnuniyetle karşılanır.',
     fine:'© Saint Benoît Fransız Lisesi, İstanbul - 2026'}
@@ -786,7 +793,7 @@ fr:{
   ack:{kicker:"", title:'Remerciements', tier1Label:'sous la direction de', principalRole:'— Directeur', supervisorRole:'— Superviseurs de projet',
     tier2Label:"le département de biologie et l'équipe de travail", tier3Label:'ainsi qu\'avec mes remerciements à', tier4Label:"les élèves de Saint Benoît 247", workshopNote:'ainsi qu\'à toutes les personnes qui ont participé d\'une manière ou d\'une autre à ce projet...'},
   resources:{kicker:'pour aller plus loin', title:'Ressources', lead:"Les sources des identifications et des fiches de cette collection, et des lectures pour aller plus loin."},
-  footer:{title:'Musée d\'histoire naturelle du Lycée Saint Benoît', tagline:"[logo gelir muhtemelen / reformat]",
+  footer:{title:'La musée d\'histoire naturelle du Lycée Saint Benoît',
     contactTitle:'Contact', moreTitle:'Adresse', moreText:'Kemeraltı Caddesi No: 11, Müeyyetzade Mahallesi, 34425 Karaköy - Beyoğlu / İstanbul',
     note:"Cette collection est encore en cours d'identification et de documentation. Si vous souhaitez apporter une correction ou un complément aux informations fournies, n'hésitez pas à m'envoyer un e-mail à l'adresse gulizakar8@gmail.com ; votre contribution sera vivement encouragée et appréciée.",
     fine:'© Lycée Français Saint Benoît, Istanbul - 2026'}
