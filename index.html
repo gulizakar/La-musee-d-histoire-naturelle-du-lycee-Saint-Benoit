@@ -150,7 +150,8 @@
   /* ---------- about ---------- */
   .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;}
   @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
-  .about-grid .frame{height:340px;margin-bottom:14px;}
+    .about-grid .frame{height:auto;min-height:0;aspect-ratio:3 / 4;max-width:380px;margin-bottom:14px;}
+  .about-grid .frame.photo img{object-position:center top;}
   .foreword{border-left:2px solid var(--brass-dim);padding-left:20px;margin-bottom:34px;}
   .foreword .who{font-style:italic;color:var(--brass);margin-top:.6em;font-size:.95rem;}
 
@@ -358,7 +359,7 @@
     <h1 data-i18n="about.title">About</h1>
     <div class="about-grid">
       <div>
-        <div class="frame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="about.portraitCaption">portrait — [your name]</span></div>
+        <div id="portraitSlot"></div>
         <p data-i18n="about.bio">[Your name] is a student who spent [timeframe] restoring a natural history collection that had been in storage for years. This site is the record of that work — what was found, what it took to save it, and what it means to open it up.</p>
       </div>
       <div>
@@ -504,6 +505,16 @@
    'center', 'top', 'bottom', 'left', 'right', or something like '50% 30%'. */
 const HERO_PHOTO = 'images/coll_overview.jpg';
 const HERO_FOCUS = '50% 50%';
+
+/* ABOUT PAGE PORTRAIT: put the photo in your "images" folder and write its path here.
+   Leave it as '' to keep the placeholder frame. */
+const PORTRAIT_PHOTO = 'images/about.jpg';
+
+function renderPortrait(){
+  const el = document.getElementById('portraitSlot');
+  if(!el) return;
+  el.innerHTML = PORTRAIT_PHOTO ? photoFrame(PORTRAIT_PHOTO,'portrait') : ph(t('about.portraitCaption'));
+}
 
 /* To add photos to a specimen, put the image files in an "images" folder next to this file
    and list them in the "photos" array. The FIRST one is the hero shot, e.g.
@@ -666,17 +677,17 @@ const SPECIES = [
    Add as many entries as you like (copy a line). Leave photo:'' for a placeholder.
    Captions are optional; leave them '' for none. */
 const BTS_CLEANING = [
-  {photo:'images/cleaning.JPG', caption:{en:'', tr:'', fr:''}},
-  {photo:'images/adjusting.JPG', caption:{en:'', tr:'', fr:''}},
-  {photo:'images/shooting.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'cleaning.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'adjusting.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'shooting.JPG', caption:{en:'', tr:'', fr:''}},
 ];
 const BTS_BEFORE_AFTER = [
-  {before:'images/before.jpg', after:'images/after.jpg', caption:{en:'', tr:'', fr:''}},
+  {before:'before.JPG', after:'after.JPG', caption:{en:'', tr:'', fr:''}},
 ];
 const BTS_WORKSHOP = [
-  {photo:'images/workshop1.jpg', caption:{en:'', tr:'', fr:''}},
-  {photo:'images/workshop2.jpg', caption:{en:'', tr:'', fr:''}},
-  {photo:'images/workshop3.jpg', caption:{en:'', tr:'', fr:''}},
+  {photo:'workshop1.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'workshop2.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'workshop3.JPG', caption:{en:'', tr:'', fr:''}},
 ];
 
 
@@ -707,13 +718,13 @@ en:{
     aboutTitle:'Who made this website?', aboutText:'This website was created by Güliz Akar, a student who spent a year restoring the collection. The full story is on the About and Behind the Scenes pages.',
     highlightsTitle:'From the collection...'},
   about:{kicker:'about the project', title:'About', portraitCaption:'[photo]',
-    bio:'[info]',
-    forewordProject:'[foreword of the project]',
-    forewordProjectWho:'— [name]',
-    forewordSupervisor:"[text]",
-    forewordSupervisorWho:"— [name]",
-    forewordPrincipal:"[text]",
-    forewordPrincipalWho:"— [name]"},
+    bio:'Güliz Akar, a senior at Saint Benoît High School, has been working on this project since September 2025. She is an aspiring evolutionary biologist, and values the practice of science communication and preservation.',
+    forewordProject:'The collection has been cleaned by Güliz and her team. Safe ways to clean taxidermy has been investigated, and workshops have been held to teach students about school heritage and preservation of natural history specimens.',
+    forewordProjectWho:' ',
+    forewordSupervisor:'After months of work, Güliz realized that work was progressing slowly. She spent that summer at school, working on the collection and spending hours a day correcting identifications of specimens. She started photographing them as identification progressed.',
+    forewordSupervisorWho:' ',
+    forewordPrincipal:'Finally, the website was created, and all specimens were uploaded one by one to the digital catalogue. Now, everything is public.',
+    forewordPrincipalWho:' '},
   history:{kicker:'where the collection came from', title:'History',
     lead:"The information we have about the collection is limited, but here's what we do know;",
     quote:'"There are birds that Amedée Alléon donated to the natural history laboratory, and there are birds he taxidermied himself. These are very valuable."',
@@ -746,13 +757,13 @@ tr:{
     aboutTitle:'Bu siteyi kim yaptı?', aboutText:'Bu site, bir yıl boyunca koleksiyonun restorasyonu ile ilgilenen Güliz Akar tarafından hazırlanmıştır. Hikayenin tamamına Hakkında ve Perde Arkası sayfalarından erişebilirsiniz.',
     highlightsTitle:'Koleksiyondan'},
   about:{kicker:'proje hakkında', title:'Hakkında', portraitCaption:'[photo]',
-    bio:'[info]',
-    forewordProject:'[foreword of the project]',
-    forewordProjectWho:'— [name]',
-    forewordSupervisor:'[text]',
-    forewordSupervisorWho:'— [name]',
-    forewordPrincipal:'[text]',
-    forewordPrincipalWho:'— [name]'},
+    bio:'Güliz Akar, Saint Benoît Lisesi 12. sınıf öğrencisi, Eylül 2025\'ten beri bu proje üzerinde çalışıyor. İleride evrimsel biyoloji alanında çalışmalar yapmak isteyen Güliz, bilim iletişimi ve koruma çalışmalarına önem veriyor.',
+    forewordProject:'Koleksiyon Güliz ve ekibi tarafından temizlendi. Taksidermi temizlemenin güvenli yolları araştırıldı ve öğrencilere okul mirası ve tabiat tarihi örneklerinin korunması hakkında bilgi vermek için atölyeler düzenlendi.',
+    forewordProjectWho:' ',
+    forewordSupervisor:'Aylar süren çalışmanın ardından, Güliz işlerin yavaş ilerlediğini fark etti. O yaz boyunca okulda kalarak koleksiyon üzerinde çalıştı ve örneklerin teşhislerini düzeltmek için günde saatler harcadı. Teşhis ilerledikçe örnekleri fotoğraflamaya başladı.',
+    forewordSupervisorWho:' ',
+    forewordPrincipal:'Sonunda, web sitesi oluşturuldu ve tüm örnekler tek tek dijital kataloğa yüklendi. Artık her şey ulaşılabilir.',
+    forewordPrincipalWho:' '},
   history:{kicker:'koleksiyonun nereden geldiği hakkında', title:'Tarihçe',
     lead:'Koleksiyonun tarihi hakkında sahip olduğumuz bilgi oldukça sınırlı, fakat bildiklerimiz bunlar;',
     quote:'"[A line from the interview]"',
@@ -785,13 +796,13 @@ fr:{
     aboutTitle:'Qui a créé ce site ?', aboutText:'Ce site a été créé par Güliz Akar, une élève qui a passé un an à restaurer la collection. L\'histoire complète est disponible sur les pages À propos et Coulisses.',
     highlightsTitle:'De la collection'},
   about:{kicker:'à propos du projet', title:'À propos', portraitCaption:'[photo]',
-    bio:'[info]',
-    forewordProject:'[foreword of the project]',
-    forewordProjectWho:'— [name]',
-    forewordSupervisor:'[text]',
-    forewordSupervisorWho:'— [name]',
-    forewordPrincipal:'[text]',
-    forewordPrincipalWho:'— [name]'},
+    bio:'Güliz Akar, élève de terminale au Lycée Saint Benoît, travaille sur ce projet depuis septembre 2025. Elle aspire à devenir biologiste évolutive et accorde une grande importance à la communication scientifique et à la préservation.',
+    forewordProject:'La collection a été nettoyée par Güliz et son équipe. Des méthodes sûres pour nettoyer la taxidermie ont été étudiées, et des ateliers ont été organisés pour enseigner aux élèves l\'héritage scolaire et la préservation des spécimens d\'histoire naturelle.',
+    forewordProjectWho:' ',
+    forewordSupervisor:'Après des mois de travail, Güliz a constaté que les progrès étaient lents. Elle a passé cet été à l\'école, travaillant sur la collection et passant des heures chaque jour à corriger les identifications des spécimens. Elle a commencé à les photographier au fur et à mesure de l\'avancement des identifications.',
+    forewordSupervisorWho:' ',
+    forewordPrincipal:'Finalement, le site web a été créé et tous les spécimens ont été téléchargés un par un dans le catalogue numérique. Tout est maintenant accessible au public.',
+    forewordPrincipalWho:' '},
   history:{kicker:"d'où vient la collection", title:'Histoire',
     lead:'Les informations que nous avons sur la collection sont limitées, mais voici ce qu\'on sait;',
     quote:'"Il y a des oiseaux offerts par Amedée Alléon dans le laboratoire d\'histoire naturelle, et il y a des oiseaux qu\'il a lui-même naturalisés, ce sont des choses très précieuses."',
@@ -888,6 +899,7 @@ function applyI18n(){
   renderBehind();
   renderResources();
   renderHero();
+  renderPortrait();
   if(currentView==='specimen' && window._openSpecimen) renderSpecimenDetail(window._openSpecimen);
 }
 
