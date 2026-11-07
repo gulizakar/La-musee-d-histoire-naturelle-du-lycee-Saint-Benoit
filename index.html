@@ -74,9 +74,11 @@
 
   /* ---------- header ---------- */
   header.site{
-    position:sticky;top:0;z-index:40;
+    position:relative;
     background:var(--paper);
     border-bottom:1px solid var(--rule);
+    header.site{transition:transform .3s ease;}
+    header.site.hide{transform:translateY(-100%);}
   }
   .head-row{
     display:flex;align-items:center;gap:20px;flex-wrap:wrap;
@@ -235,17 +237,22 @@
   .bts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px;}
   @media (max-width:760px){.bts-grid{grid-template-columns:1fr 1fr;}}
   @media (max-width:520px){.bts-grid{grid-template-columns:1fr;}}
-  .bts-grid .frame{height:150px;font-size:.8rem;}
-  .ba-slider{position:relative;max-width:560px;border:1px solid var(--rule);margin-top:14px;user-select:none;}
-  .ba-slider .layer{position:relative;height:320px;}
-  .ba-slider .frame{position:absolute;inset:0;height:auto;}
-  .ba-slider .after-clip{position:absolute;inset:0;overflow:hidden;width:50%;}
-  .ba-slider .after-clip .frame{width:560px;max-width:none;}
-  .ba-slider input[type=range]{
-    position:absolute;bottom:10px;left:10px;right:10px;width:calc(100% - 20px);
-  }
-  .ba-divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--brass);pointer-events:none;}
-  .ba-labels{display:flex;justify-content:space-between;font-size:.78rem;font-style:italic;color:var(--ink-soft);margin-top:6px;}
+    .bts-grid .frame{height:auto;min-height:0;aspect-ratio:3 / 2;font-size:.8rem;}
+  .bts-fig{margin:0;}
+  .bts-fig figcaption{font-style:italic;color:var(--ink-soft);font-size:.88rem;margin-top:6px;}
+
+  .ba-list{display:grid;gap:36px;margin-top:14px;}
+  .ba-item{max-width:640px;}
+  .ba-slider{position:relative;aspect-ratio:3 / 2;border:1px solid var(--rule);overflow:hidden;user-select:none;background:var(--paper-card);}
+  .ba-layer{position:absolute;inset:0;}
+  .ba-layer img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ba-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-style:italic;color:var(--ink-soft);}
+  .ba-after{clip-path:inset(0 0 0 var(--pos,50%));}
+  .ba-divider{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;margin-left:-1px;background:var(--brass);pointer-events:none;}
+  .ba-knob{position:absolute;top:50%;left:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--brass);border:2px solid var(--paper-card);}
+  .ba-slider input[type=range]{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;}
+  .ba-labels{display:flex;justify-content:space-between;font-size:.85rem;font-style:italic;color:var(--ink-soft);margin-top:6px;}
+  .ba-caption{margin:6px 0 0;font-size:.95rem;color:var(--ink-soft);}
 
   /* ---------- acknowledgements ---------- */
   .ack-tier{margin-bottom:38px;}
@@ -330,7 +337,7 @@
         <p data-i18n="home.waysText">Browse the collection as a catalogue, specimen by specimen — or follow the tree of life to see how everything in the collection is related.</p>
         <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;">
           <button class="btn" data-goto="explore" data-i18n="home.exploreBtn">Explore the collection</button>
-          <button class="btn" style="background:var(--brass);" data-goto="tree" data-i18n="home.treeBtn">See the tree of life</button>
+          <!-- <button class="btn" style="background:var(--brass);" data-goto="tree" data-i18n="home.treeBtn">See the tree of life</button> -->
         </div>
       </div>
       <div>
@@ -419,17 +426,7 @@
     <div class="bts-grid" id="cleaningGrid"></div>
 
     <h3 style="margin-top:36px;" data-i18n="behind.baTitle">Before and after</h3>
-    <div class="ba-slider" id="baSlider">
-      <div class="layer">
-        <div class="frame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="behind.beforeCaption">before</span></div>
-        <div class="after-clip" id="afterClip">
-          <div class="frame"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span data-i18n="behind.afterCaption">after</span></div>
-        </div>
-        <div class="ba-divider" id="baDivider"></div>
-      </div>
-      <input type="range" min="0" max="100" value="50" id="baRange">
-    </div>
-    <div class="ba-labels"><span data-i18n="behind.beforeCaption">before</span><span data-i18n="behind.afterCaption">after</span></div>
+   <div class="ba-list" id="baList"></div>
 
     <h3 style="margin-top:36px;" data-i18n="behind.workshopTitle">The workshop</h3>
     <p data-i18n="behind.workshopText">A large part of the work happened in a single hands-on workshop, where volunteers helped with cleaning, sorting and logging.</p>
@@ -664,6 +661,25 @@ const SPECIES = [
   
 ];
 
+
+/* BEHIND THE SCENES PHOTOS: put the files in the "images" folder and write their names here.
+   Add as many entries as you like (copy a line). Leave photo:'' for a placeholder.
+   Captions are optional; leave them '' for none. */
+const BTS_CLEANING = [
+  {photo:'cleaning.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'adjusting.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'shooting.JPG', caption:{en:'', tr:'', fr:''}},
+];
+const BTS_BEFORE_AFTER = [
+  {before:'before.JPG', after:'after.JPG', caption:{en:'', tr:'', fr:''}},
+];
+const BTS_WORKSHOP = [
+  {photo:'workshop1.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'workshop2.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'workshop3.JPG', caption:{en:'', tr:'', fr:''}},
+];
+
+
 const STATUS_LABEL = {
   en:{lc:'Least Concern', nt:'Near Threatened', vu:'Vulnerable', en2:'Endangered', cr:'Critically Endangered', dd:'Data Deficient'},
   tr:{lc:'Düşük endişe', nt:'Neredeyse tehdit altında', vu:'Savunmasız', en2:'Tehlikede', cr:'Kritik tehlikede', dd:'Eksik verili'},
@@ -686,8 +702,8 @@ en:{
   brand:{sub:'Saint Benoît High School Natural History Museum'},
   home:{heroCaption:'[photo]', kicker:'Created by Güliz Akar', title:'Welcome to Turkey\'s first digital natural history museum!',
     lead:'This collection, which had been in storage for a long time, was cleaned, identified, cataloged, and photographed piece by piece. It is now on display for anyone interested to examine.',
-    waysTitle:'Two ways to explore', waysText:'Browse the collection as a catalogue, specimen by specimen, or follow the tree of life to see how every specimen is related.',
-    exploreBtn:'See the collection', treeBtn:'See the tree of life',
+    waysTitle:'Explore the collection', waysText:'Browse the collection as a catalogue, specimen by specimen.', // two ways to explore // , or follow the tree of life to see how every specimen is related.
+    exploreBtn:'Start exploring!', treeBtn:'See the tree of life',
     aboutTitle:'Who made this website?', aboutText:'This website was created by Güliz Akar, a student who spent a year restoring the collection. The full story is on the About and Behind the Scenes pages.',
     highlightsTitle:'From the collection...'},
   about:{kicker:'about the project', title:'About', portraitCaption:'[photo]',
@@ -707,9 +723,9 @@ en:{
   specimen:{back:'← back to the catalogue', sciLabel:'Scientific name', sexLabel:'Sex', ageLabel:'Age', juvenile:'Juvenile', adult:'Adult', statusLabel:'Conservation status', accLabel:'Accession no.'},
   tree:{kicker:'an alternative route through the collection', title:'Tree of life',
     lead:'Rather than browsing by shelf, follow the branches below to see how the specimens in this collection relate to one another. Select any name to open its record. [detaylanacak]'},
-  behind:{kicker:'the restoration itself', title:'Behind the scenes', lead:'[text]',
-    cleaningTitle:'Cleaning and stabilising', baTitle:'Before and after', beforeCaption:'before', afterCaption:'after',
-    workshopTitle:'The workshop', workshopText:'[explanation]',
+  behind:{kicker:'the restoration itself', title:'Behind the scenes', lead:'A few shots from the process...',
+    cleaningTitle:'Cleaning and photography', baTitle:'Before and after', beforeCaption:'before', afterCaption:'after',
+    workshopTitle:'The workshop', workshopText:'During the end of the first semester of the 2025-2026 school year, prep students visited the lab to learn about taxidermy and restoration. They even got to have a hands-on experience with the specimens, helping to clean them.',
     cleaning1:'[caption]', cleaning2:'[caption]', cleaning3:'[caption]',
     workshop1:'[photo]', workshop2:'[photo]', workshop3:'[photo]'},
   ack:{kicker:'', title:'Acknowledgements', tier1Label:'with the guidance of', principalRole:'— Principal', supervisorRole:'— Project Supervisors',
@@ -725,8 +741,8 @@ tr:{
   brand:{sub:'Saint Benoît Lisesi Tabiat Tarihi Müzesi'},
   home:{heroCaption:'[photo]', kicker:'Güliz Akar tarafından hazırlanmıştır', title:'Türkiye\'nin ilk dijital tabiat tarihi müzesine hoş geldiniz!',
     lead:'Uzun süredir depoda saklanan bu koleksiyon, titizlikle temizlendi, teşhis edildi, kaydedildi ve fotoğraflandı. Artık merak eden herkesin incelemesi için gözler önünde.',
-    waysTitle:'İki farklı keşif yolu', waysText:'Koleksiyonu bir katalog gibi, örnek örnek inceleyebilir ya da yaşam ağacını takip edebilir ve tüm örneklerin birbiriyle ilişkisini görebilirsiniz.',
-    exploreBtn:'Koleksiyonu gör', treeBtn:'Yaşam ağacını gör',
+    waysTitle:'Koleksiyonu keşfet', waysText:'Koleksiyonu bir katalog gibi, örnek örnek inceleyebilirsiniz.', // iki farkli kesif yolu // ya da yaşam ağacını takip edebilir ve tüm örneklerin birbiriyle ilişkisini görebilirsiniz.
+    exploreBtn:'Keşfe başla!', treeBtn:'Yaşam ağacını gör',
     aboutTitle:'Bu siteyi kim yaptı?', aboutText:'Bu site, bir yıl boyunca koleksiyonun restorasyonu ile ilgilenen Güliz Akar tarafından hazırlanmıştır. Hikayenin tamamına Hakkında ve Perde Arkası sayfalarından erişebilirsiniz.',
     highlightsTitle:'Koleksiyondan'},
   about:{kicker:'proje hakkında', title:'Hakkında', portraitCaption:'[photo]',
@@ -746,9 +762,9 @@ tr:{
   specimen:{back:'← kataloğa dön', sciLabel:'Bilimsel adı', sexLabel:'Cinsiyeti', ageLabel:'Yaş', juvenile:'Yavru', adult:'Yetişkin', statusLabel:'Koruma durumu', accLabel:'Envanter no.'},
   tree:{kicker:'koleksiyonda alternatif bir yol', title:'Yaşam ağacı',
     lead:'Rafları dolaşmak yerine, koleksiyondaki örneklerin birbiriyle nasıl ilişkili olduğunu görmek için aşağıdaki dalları takip edin. Kaydını açmak için bir isme tıklayın. [detaylanacak]'},
-  behind:{kicker:'restorasyonun hakkında', title:'Perde arkası', lead:'[text]',
-    cleaningTitle:'[caption]', baTitle:'Öncesi ve sonrası', beforeCaption:'öncesi', afterCaption:'sonrası',
-    workshopTitle:'Atölye çalışmaları', workshopText:"[explanation]",
+  behind:{kicker:'restorasyonun hakkında', title:'Perde arkası', lead:'Süreçten birkaç kare...',
+    cleaningTitle:'Temizlik ve fotoğraf çekimi', baTitle:'Öncesi ve sonrası', beforeCaption:'öncesi', afterCaption:'sonrası',
+    workshopTitle:'Atölye çalışmaları', workshopText:"2025-2026 eğitim yılının ilk döneminin sonunda, hazırlık sınıfı öğrencileri laboratuvarı ziyaret ederek, taksidermi ve restorasyon hakkında bilgi edindiler. Hatta örneklerle uygulamalı deneyim yaşadılar ve temizlemeye yardımcı oldular.",
     cleaning1:'[caption]', cleaning2:'[caption]', cleaning3:'[caption]',
     workshop1:'[photo]', workshop2:'[photo]', workshop3:'[photo]'},
   ack:{kicker:'', title:'Teşekkürler', tier1Label:'Rehberliği altında bulunduğum', principalRole:'— Okul Müdürü', supervisorRole:'— Proje Danışmanları',
@@ -764,8 +780,8 @@ fr:{
   brand:{sub:'  '},
   home:{heroCaption:'[photo]', kicker:'Créé par Güliz Akar', title:'Bienvenue au premier musée numérique d\'histoire naturelle de Turquie !',
     lead:"Cette collection, conservée depuis longtemps en entrepôt, a été soigneusement nettoyée, identifiée, répertoriée et photographiée. Elle est désormais accessible à tous ceux qui souhaitent la découvrir.",
-    waysTitle:'Deux façons de découvrir', waysText:"Parcourez la collection comme un catalogue, spécimen par spécimen, ou suivez l'arbre du vivant pour voir comment tout est lié.",
-    exploreBtn:'Voir la collection', treeBtn:"Voir l'arbre du vivant",
+    waysTitle:'Découvrir la collection', waysText:"Parcourez la collection comme un catalogue, spécimen par spécimen.", // deux facons de decouvrir //  ou suivez l'arbre du vivant pour voir comment tout est lié.
+    exploreBtn:'Commence à explorer !', treeBtn:"Voir l'arbre du vivant",
     aboutTitle:'Qui a créé ce site ?', aboutText:'Ce site a été créé par Güliz Akar, une élève qui a passé un an à restaurer la collection. L\'histoire complète est disponible sur les pages À propos et Coulisses.',
     highlightsTitle:'De la collection'},
   about:{kicker:'à propos du projet', title:'À propos', portraitCaption:'[photo]',
@@ -785,9 +801,9 @@ fr:{
   specimen:{back:'← retour au catalogue', sciLabel:'Nom scientifique', sexLabel:'Sexe', ageLabel:'Âge', juvenile:'Juvénile', adult:'Adulte', statusLabel:'Statut de conservation', accLabel:'N° d\'inventaire'},
   tree:{kicker:'un autre chemin dans la collection', title:'Arbre du vivant',
     lead:"Plutôt que de parcourir les étagères, suivez les branches ci-dessous pour voir comment les spécimens de cette collection sont liés entre eux. Sélectionnez un nom pour ouvrir sa fiche. [detaylanacak]"},
-  behind:{kicker:'la restauration elle-même', title:'Coulisses', lead:"[text]",
-    cleaningTitle:'[caption]', baTitle:'Avant et après', beforeCaption:'avant', afterCaption:'après',
-    workshopTitle:"L'atelier", workshopText:"[explanation]",
+  behind:{kicker:'la restauration elle-même', title:'Coulisses', lead:"Quelques aperçus du processus...",
+    cleaningTitle:'Nettoyage et photographie', baTitle:'Avant et après', beforeCaption:'avant', afterCaption:'après',
+    workshopTitle:"L'atelier", workshopText:"Vers le fin du premier semestre de l'année scolaire 2025-2026, les élèves de la classe préparatoire ont visité le laboratoire pour en apprendre davantage sur la taxidermie et la restauration. Ils ont même eu l'occasion de manipuler les spécimens et d'aider à les nettoyer.",
     cleaning1:'[caption]', cleaning2:'[caption]', cleaning3:'[caption]',
     workshop1:'[photo]', workshop2:'[photo]', workshop3:'[photo]'},
   ack:{kicker:"", title:'Remerciements', tier1Label:'sous la direction de', principalRole:'— Directeur', supervisorRole:'— Superviseurs de projet',
@@ -877,7 +893,7 @@ function applyI18n(){
 
 /* ======================= NAV ======================= */
 
-const NAV_ORDER = ['home','about','history','explore','tree','behind','ack'];
+const NAV_ORDER = ['home','about','history','explore','behind','ack']; // tree right after explore when tree of life gets updated
 
 function renderNav(){
   const nav = document.getElementById('mainNav');
@@ -1083,8 +1099,11 @@ const RESOURCES = [
    title:{en:'Collins Birds of the World', tr:'Collins Birds of the World', fr:'Collins Birds of the World'},
    desc:{en:'[N. Arlot, B. van Perlo, 2021]', tr:'[N. Arlot, B. van Perlo, 2021]', fr:'[N. Arlot, B. van Perlo, 2021]'}},
   {url:'',
-   title:{en:'', tr:'', fr:''},
-   desc:{en:'', tr:'', fr:''}}
+   title:{en:'Bir Zamanlar Bakırköy', tr:'Bir Zamanlar Bakırköy', fr:'Bir Zamanlar Bakırköy'},
+   desc:{en:'Turgay Tuna, 2015', tr:'Turgay Tuna, 2015', fr:'Turgay Tuna, 2015'}},
+  {url:'https://youtu.be/F_4fjk1iM-Q?si=yD4loA43bnizwUPF',
+   title:{en:'Mimarlık Seminerleri - "Teneffüs” - Cem Sorguç, Turgay Tuna', tr:'Mimarlık Seminerleri - "Teneffüs” - Cem Sorguç, Turgay Tuna', fr:'Mimarlık Seminerleri - "Teneffüs” - Cem Sorguç, Turgay Tuna'},
+   desc:{en:'Akbank Sanat, 2026', tr:'Akbank Sanat, 2026', fr:'Akbank Sanat, 2026'}},
 ];
 
 function renderResources(){
@@ -1098,20 +1117,34 @@ function renderResources(){
 
 /* ======================= BEHIND THE SCENES ======================= */
 
-function renderBehind(){
-  document.getElementById('cleaningGrid').innerHTML =
-    ph(t('behind.cleaning1')) + ph(t('behind.cleaning2')) + ph(t('behind.cleaning3'));
-  document.getElementById('workshopGrid').innerHTML =
-    ph(t('behind.workshop1')) + ph(t('behind.workshop2')) + ph(t('behind.workshop3'));
+function btsFigure(item){
+  const cap = (item.caption && item.caption[LANG]) || '';
+  return '<figure class="bts-fig">'+photoFrame(item.photo,'photo')+(cap?'<figcaption>'+cap+'</figcaption>':'')+'</figure>';
 }
-
-const baRange = document.getElementById('baRange');
-const afterClip = document.getElementById('afterClip');
-const baDivider = document.getElementById('baDivider');
-baRange.addEventListener('input', ()=>{
-  afterClip.style.width = baRange.value+'%';
-  baDivider.style.left = baRange.value+'%';
-});
+function baImg(src,label){
+  return src ? '<img src="'+safeSrc(src)+'" alt="'+label+'">' : '<div class="ba-ph">'+label+'</div>';
+}
+function renderBehind(){
+  document.getElementById('cleaningGrid').innerHTML = BTS_CLEANING.map(btsFigure).join('');
+  document.getElementById('workshopGrid').innerHTML = BTS_WORKSHOP.map(btsFigure).join('');
+  const b = t('behind.beforeCaption'), a = t('behind.afterCaption');
+  const list = document.getElementById('baList');
+  list.innerHTML = BTS_BEFORE_AFTER.map(p=>{
+    const cap = (p.caption && p.caption[LANG]) || '';
+    return '<div class="ba-item"><div class="ba-slider">'+
+      '<div class="ba-layer">'+baImg(p.before,b)+'</div>'+
+      '<div class="ba-layer ba-after">'+baImg(p.after,a)+'</div>'+
+      '<div class="ba-divider"><span class="ba-knob"></span></div>'+
+      '<input type="range" min="0" max="100" value="50" aria-label="'+b+' / '+a+'">'+
+      '</div><div class="ba-labels"><span>'+b+'</span><span>'+a+'</span></div>'+
+      (cap?'<p class="ba-caption">'+cap+'</p>':'')+'</div>';
+  }).join('');
+  list.querySelectorAll('.ba-slider').forEach(s=>{
+    s.querySelector('input').addEventListener('input', e=>{
+      s.style.setProperty('--pos', e.target.value+'%');
+    });
+  });
+}
 
 /* ======================= ACKNOWLEDGEMENTS ======================= */
 
@@ -1129,6 +1162,12 @@ function renderAck(){
   document.getElementById('ackTeam').innerHTML = TEAM_NAMES.map(n=>'<div>'+n+'</div>').join('');
   document.getElementById('ackHelpers').innerHTML = HELPER_NAMES.map(n=>'<div>'+n+'</div>').join('');
 }
+  let lastScrollY = 0;
+window.addEventListener('scroll', ()=>{
+  const y = window.scrollY;
+  document.querySelector('header.site').classList.toggle('hide', y > lastScrollY && y > 120);
+  lastScrollY = y;
+});
 
 /* ======================= INIT ======================= */
 
