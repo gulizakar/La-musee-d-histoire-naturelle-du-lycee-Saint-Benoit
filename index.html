@@ -307,7 +307,7 @@
 
 <header class="site">
   <div class="head-row">
-    <div class="logo-slot"><img src="images/logo.PNG" alt="MHNSB logo"></div>
+    <div class="logo-slot"><img src="s/logo.PNG" alt="MHNSB logo"></div>
     <div class="brand">
       <div class="t1">La musée d'histoire naturelle du Lycée Saint Benoît</div>
       <div class="t2" data-i18n="brand.sub">A natural history collection, rediscovered</div>
@@ -476,7 +476,7 @@
 <footer class="site">
   <div class="wrap foot-grid">
       <div class="foot-brand">
-        <img class="foot-logo" src="images/logo.PNG" alt="MHNSB logo">
+        <img class="foot-logo" src="s/logo.PNG" alt="MHNSB logo">
         <div class="foot-name">
           <span>Musée d'histoire naturelle</span>
           <span>du Lycée Saint Benoît</span>
@@ -499,16 +499,16 @@
 <script>
 /* ======================= DATA ======================= */
 
-/* HOME PAGE HERO PHOTO: put the photo in your "images" folder and write its name here,
-   e.g. 'images/hero.jpg'. Leave it as '' to show the placeholder frame.
+/* HOME PAGE HERO PHOTO: put the photo in your "s" folder and write its name here,
+   e.g. 's/hero.jpg'. Leave it as '' to show the placeholder frame.
    HERO_FOCUS chooses which part of the photo stays visible when the wide banner trims it:
    'center', 'top', 'bottom', 'left', 'right', or something like '50% 30%'. */
-const HERO_PHOTO = 'images/coll_overview.jpg';
+const HERO_PHOTO = 's/coll_overview.jpg';
 const HERO_FOCUS = '50% 50%';
 
-/* ABOUT PAGE PORTRAIT: put the photo in your "images" folder and write its path here.
+/* ABOUT PAGE PORTRAIT: put the photo in your "s" folder and write its path here.
    Leave it as '' to keep the placeholder frame. */
-const PORTRAIT_PHOTO = 'images/about.jpg';
+const PORTRAIT_PHOTO = 's/about.jpg';
 
 function renderPortrait(){
   const el = document.getElementById('portraitSlot');
@@ -516,14 +516,14 @@ function renderPortrait(){
   el.innerHTML = PORTRAIT_PHOTO ? photoFrame(PORTRAIT_PHOTO,'portrait') : ph(t('about.portraitCaption'));
 }
 
-/* To add photos to a specimen, put the image files in an "images" folder next to this file
+/* To add photos to a specimen, put the  files in an "s" folder next to this file
    and list them in the "photos" array. The FIRST one is the hero shot, e.g.
-   photos:['images/testudo-1.jpg','images/testudo-2.jpg','images/testudo-3.jpg']
+   photos:['s/testudo-1.jpg','s/testudo-2.jpg','s/testudo-3.jpg']
    Leave it as [] to show placeholder frames.
    sex is 'male', 'female' or 'unknown'. status is 'lc','nt','vu','en2','cr' or 'dd'. */
 const SPECIES = [
     {id:"chroicocephalus-ridibundus", cls:"Aves", sci:"Chroicocephalus ridibundus", acc:"OIS.0001", sex:"unknown", juvenile:true, status:"lc",
-    photos:["images/OIS.0001.1.jpg", "images/OIS.0001.2.jpg", "images/OIS.0001.3.jpg", "images/OIS.0001.4.jpg"],
+    photos:["s/OIS.0001.1.jpg", "s/OIS.0001.2.jpg", "images/OIS.0001.3.jpg", "images/OIS.0001.4.jpg"],
     common:{en:"Black-headed gull", tr:"Karabaş martı", fr:"Mouette rieuse"},
     desc:{en:"",
           tr:"",
@@ -886,17 +886,17 @@ const SPECIES = [
    Add as many entries as you like (copy a line). Leave photo:'' for a placeholder.
    Captions are optional; leave them '' for none. */
 const BTS_CLEANING = [
-  {photo:'cleaning.JPG', caption:{en:'', tr:'', fr:''}},
-  {photo:'adjusting.JPG', caption:{en:'', tr:'', fr:''}},
-  {photo:'shooting.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'images/cleaning.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'images/adjusting.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'images/shooting.JPG', caption:{en:'', tr:'', fr:''}},
 ];
 const BTS_BEFORE_AFTER = [
-  {before:'before.JPG', after:'after.JPG', caption:{en:'', tr:'', fr:''}},
+  {before:'images/before.JPG', after:'imges/after.JPG', caption:{en:'', tr:'', fr:''}},
 ];
 const BTS_WORKSHOP = [
-  {photo:'workshop1.JPG', caption:{en:'', tr:'', fr:''}},
-  {photo:'workshop2.JPG', caption:{en:'', tr:'', fr:''}},
-  {photo:'workshop3.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'images/workshop1.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'images/workshop2.JPG', caption:{en:'', tr:'', fr:''}},
+  {photo:'images/workshop3.JPG', caption:{en:'', tr:'', fr:''}},
 ];
 
 
